@@ -1,34 +1,34 @@
-ÊµÑéÆ÷²Ä:
-	MiniSTM32F103¿ª·¢°åV3°æ±¾
+å®žéªŒå™¨æ:
+	MiniSTM32F103å¼€å‘æ¿V3ç‰ˆæœ¬
 	
-ÊµÑéÄ¿µÄ:
-	Ñ§Ï°STM32 SPI½Ó¿ÚµÄÊ¹ÓÃ,Çý¶¯W25Q64ÊµÏÖSPI FLASHÊý¾Ý¶ÁÐ´.
+å®žéªŒç›®çš„:
+	å­¦ä¹ STM32 SPIæŽ¥å£çš„ä½¿ç”¨,é©±åŠ¨W25Q64å®žçŽ°SPI FLASHæ•°æ®è¯»å†™.
 	
-Ó²¼þ×ÊÔ´:
-	1,DS0(Á¬½ÓÔÚPA8) 
-	2,´®¿Ú1(²¨ÌØÂÊ:9600,PA9/PA10Á¬½ÓÔÚ°åÔØUSB×ª´®¿ÚÐ¾Æ¬CH340ÉÏÃæ)
-	3,ALIENTEK 2.8/3.5/4.3/7´çTFTLCDÄ£¿é(Í¨¹ýGPIOÇý¶¯,Á¬½Ó¹ØÏµ¼ûlcd.h)
-	4,°´¼üKEY0(PC5)/KEY_UP(PA0,Ò²³ÆÖ®ÎªWK_UP) 
-	5,W25Q64(SPI FLASHÐ¾Æ¬,Á¬½ÓÔÚSPI1ÉÏ)
+ç¡¬ä»¶èµ„æº:
+	1,DS0(è¿žæŽ¥åœ¨PA8) 
+	2,ä¸²å£1(æ³¢ç‰¹çŽ‡:9600,PA9/PA10è¿žæŽ¥åœ¨æ¿è½½USBè½¬ä¸²å£èŠ¯ç‰‡CH340ä¸Šé¢)
+	3,ALIENTEK 2.8/3.5/4.3/7å¯¸TFTLCDæ¨¡å—(é€šè¿‡GPIOé©±åŠ¨,è¿žæŽ¥å…³ç³»è§lcd.h)
+	4,æŒ‰é”®KEY0(PC5)/KEY_UP(PA0,ä¹Ÿç§°ä¹‹ä¸ºWK_UP) 
+	5,W25Q64(SPI FLASHèŠ¯ç‰‡,è¿žæŽ¥åœ¨SPI1ä¸Š)
 		
-ÊµÑéÏÖÏó:
-	±¾ÊµÑéÍ¨¹ýKEY_UP°´¼üÀ´¿ØÖÆW25Q64µÄÐ´Èë£¬Í¨¹ýÁíÍâÒ»¸ö°´¼üKEY0À´¿ØÖÆW25Q64µÄ¶ÁÈ¡¡£²¢ÔÚLCDÄ£¿é
-	ÉÏÃæÏÔÊ¾Ïà¹ØÐÅÏ¢¡£DS0ÌáÊ¾³ÌÐòÕýÔÚÔËÐÐ¡£Í¬Ê±£¬ÎÒÃÇ¿ÉÒÔÍ¨¹ýUSMART¿ØÖÆ¶ÁÈ¡W25QXXµÄID»òÕßÕûÆ¬²Á³ý¡£
+å®žéªŒçŽ°è±¡:
+	æœ¬å®žéªŒé€šè¿‡KEY_UPæŒ‰é”®æ¥æŽ§åˆ¶W25Q64çš„å†™å…¥ï¼Œé€šè¿‡å¦å¤–ä¸€ä¸ªæŒ‰é”®KEY0æ¥æŽ§åˆ¶W25Q64çš„è¯»å–ã€‚å¹¶åœ¨LCDæ¨¡å—
+	ä¸Šé¢æ˜¾ç¤ºç›¸å…³ä¿¡æ¯ã€‚DS0æç¤ºç¨‹åºæ­£åœ¨è¿è¡Œã€‚åŒæ—¶ï¼Œæˆ‘ä»¬å¯ä»¥é€šè¿‡USMARTæŽ§åˆ¶è¯»å–W25QXXçš„IDæˆ–è€…æ•´ç‰‡æ“¦é™¤ã€‚
 	
-×¢ÒâÊÂÏî:  
-	1,4.3´çºÍ7´çÆÁÐèÒª±È½Ï´óµçÁ÷,USB¹©µç¿ÉÄÜ²»×ã,ÇëÓÃÍâ²¿µçÔ´¹©µç(5VµçÔ´£¬½ÓVOUT2¼´¿É).
-	2,±¾Àý³ÌÔÚLCD_Initº¯ÊýÀïÃæ(ÔÚILI93xx.c),ÓÃµ½ÁËprintf,Èç¹û²»³õÊ¼»¯´®¿Ú1,½«µ¼ÖÂÒº¾§ÎÞ·¨ÏÔÊ¾!! 
-	3,LCDÄ£¿éÔÚ¿ª·¢°åµÄLCD½Ó¿ÚÉÏÃæ£¬±ØÐë¿¿ÓÒ²å
-	4,²»Òª°Ñ1820ºÍPA0µÄÌøÏßÃ±ÌøÉÏ,·ñÔò¿ÉÄÜµ¼ÖÂ°´¼ü"²»Áé".  
-	5,W25Q64ºÍNRF24L01/SD¿¨½Ó¿Ú¹²ÓÃSPI1,ËùÒÔËûÃÇ±ØÐë·ÖÊ±¸´ÓÃ,Ê¹ÓÃÒ»¸öµÄÊ±ºò,±ØÐë½ûÖ¹ÁíÍâÁ½¸öµÄÆ¬Ñ¡.
+æ³¨æ„äº‹é¡¹:  
+	1,4.3å¯¸å’Œ7å¯¸å±éœ€è¦æ¯”è¾ƒå¤§ç”µæµ,USBä¾›ç”µå¯èƒ½ä¸è¶³,è¯·ç”¨å¤–éƒ¨ç”µæºä¾›ç”µ(5Vç”µæºï¼ŒæŽ¥VOUT2å³å¯).
+	2,æœ¬ä¾‹ç¨‹åœ¨LCD_Initå‡½æ•°é‡Œé¢(åœ¨ILI93xx.c),ç”¨åˆ°äº†printf,å¦‚æžœä¸åˆå§‹åŒ–ä¸²å£1,å°†å¯¼è‡´æ¶²æ™¶æ— æ³•æ˜¾ç¤º!! 
+	3,LCDæ¨¡å—åœ¨å¼€å‘æ¿çš„LCDæŽ¥å£ä¸Šé¢ï¼Œå¿…é¡»é å³æ’
+	4,ä¸è¦æŠŠ1820å’ŒPA0çš„è·³çº¿å¸½è·³ä¸Š,å¦åˆ™å¯èƒ½å¯¼è‡´æŒ‰é”®"ä¸çµ".  
+	5,W25Q64å’ŒNRF24L01/SDå¡æŽ¥å£å…±ç”¨SPI1,æ‰€ä»¥ä»–ä»¬å¿…é¡»åˆ†æ—¶å¤ç”¨,ä½¿ç”¨ä¸€ä¸ªçš„æ—¶å€™,å¿…é¡»ç¦æ­¢å¦å¤–ä¸¤ä¸ªçš„ç‰‡é€‰.
 	  
 
-					ÕýµãÔ­×Ó@ALIENTEK
+					æ­£ç‚¹åŽŸå­@ALIENTEK
 					2014-3-09
-					¹ãÖÝÊÐÐÇÒíµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾
-					µç»°£º020-38271790
-					´«Õæ£º020-36773971
-					¹ºÂò£ºhttp://shop62103354.taobao.com
+					å¹¿å·žå¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸
+					ç”µè¯ï¼š020-38271790
+					ä¼ çœŸï¼š020-36773971
+					è´­ä¹°ï¼šhttp://shop62103354.taobao.com
 					http://shop62057469.taobao.com
-					¹«Ë¾ÍøÕ¾£ºwww.alientek.com
-					¼¼ÊõÂÛÌ³£ºwww.openedv.com
+					å…¬å¸ç½‘ç«™ï¼šwww.alientek.com
+					æŠ€æœ¯è®ºå›ï¼šwww.openedv.com
