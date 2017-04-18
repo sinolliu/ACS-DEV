@@ -136,7 +136,7 @@ bit 9-8 : memory size of channel #4 \n
 bit 11-10 : memory size of channel #5 \n
 bit 12-12 : memory size of channel #6 \n
 bit 15-14 : memory size of channel #7 \n
-W5500µÄTx, RxµÄ×î´ó¼Ä´æÆ÷¿í¶ÈÊÇ16K Bytes,\n
+W5500çš„Tx, Rxçš„æœ€å¤§å¯„å­˜å™¨å®½åº¦æ˜¯16K Bytes,\n
 In the range of 16KBytes, the memory size could be allocated dynamically by each channel.\n
 Be attentive to sum of memory size shouldn't exceed 8Kbytes\n
 and to data transmission and receiption from non-allocated channel may cause some problems.\n

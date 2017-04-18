@@ -3,41 +3,41 @@
 #include "delay.h"	   
 #include "sys.h"
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌÐòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßÐí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK MiniSTM32¿ª·¢°å
-//PS2 Çý¶¯´úÂë	   
-//ÕýµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ÐÞ¸ÄÈÕÆÚ:2014/3/12
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓÐ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖÝÊÐÐÇÒíµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºŽå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEK MiniSTM32å¼€å‘æ¿
+//PS2 é©±åŠ¨ä»£ç 	   
+//æ­£ç‚¹åŽŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2014/3/12
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·žå¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved									  
 //////////////////////////////////////////////////////////////////////////////////	
 
-//ÎïÀí½Ó¿Ú¶¨Òå
-//PS2ÊäÈë 		  				    
+//ç‰©ç†æŽ¥å£å®šä¹‰
+//PS2è¾“å…¥ 		  				    
 #define PS2_SCL PAin(15)			//PA15
 #define PS2_SDA PCin(5)				//PC5
-//PS2Êä³ö
+//PS2è¾“å‡º
 #define PS2_SCL_OUT PAout(15)		//PA15
 #define PS2_SDA_OUT PCout(5)		//PC5
 
-//ÉèÖÃPS2_SCLÊäÈëÊä³ö×´Ì¬.		  
+//è®¾ç½®PS2_SCLè¾“å…¥è¾“å‡ºçŠ¶æ€.		  
 #define PS2_SET_SCL_IN()  {GPIOA->CRH&=0X0FFFFFFF;GPIOA->CRH|=0X80000000;}
 #define PS2_SET_SCL_OUT() {GPIOA->CRH&=0X0FFFFFFF;GPIOA->CRH|=0X30000000;}	  
-//ÉèÖÃPS2_SDAÊäÈëÊä³ö×´Ì¬.		  
+//è®¾ç½®PS2_SDAè¾“å…¥è¾“å‡ºçŠ¶æ€.		  
 #define PS2_SET_SDA_IN()  {GPIOC->CRL&=0XFF0FFFFF;GPIOC->CRL|=0X00800000;}
 #define PS2_SET_SDA_OUT() {GPIOC->CRL&=0XFF0FFFFF;GPIOC->CRL|=0X00300000;} 
 
-#define MOUSE    0X20 //Êó±êÄ£Ê½
-#define KEYBOARD 0X10 //¼üÅÌÄ£Ê½
-#define CMDMODE  0X00 //·¢ËÍÃüÁî
-//PS2_Statusµ±Ç°×´Ì¬±êÖ¾
-//[5:4]:µ±Ç°¹¤×÷µÄÄ£Ê½;[7]:½ÓÊÕµ½Ò»´ÎÊý¾Ý
-//[6]:Ð£Ñé´íÎó;[3:0]:ÊÕµ½µÄÊý¾Ý³¤¶È;	 
-extern u8 PS2_Status;       //¶¨ÒåÎªÃüÁîÄ£Ê½
-extern u8 PS2_DATA_BUF[16]; //ps2Êý¾Ý»º´æÇø
+#define MOUSE    0X20 //é¼ æ ‡æ¨¡å¼
+#define KEYBOARD 0X10 //é”®ç›˜æ¨¡å¼
+#define CMDMODE  0X00 //å‘é€å‘½ä»¤
+//PS2_Statuså½“å‰çŠ¶æ€æ ‡å¿—
+//[5:4]:å½“å‰å·¥ä½œçš„æ¨¡å¼;[7]:æŽ¥æ”¶åˆ°ä¸€æ¬¡æ•°æ®
+//[6]:æ ¡éªŒé”™è¯¯;[3:0]:æ”¶åˆ°çš„æ•°æ®é•¿åº¦;	 
+extern u8 PS2_Status;       //å®šä¹‰ä¸ºå‘½ä»¤æ¨¡å¼
+extern u8 PS2_DATA_BUF[16]; //ps2æ•°æ®ç¼“å­˜åŒº
 extern u8 MOUSE_ID;
 
 void PS2_Init(void);

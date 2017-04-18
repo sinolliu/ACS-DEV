@@ -1112,7 +1112,7 @@ DWORD clmt_clust (	/* <2:Error, >=2:Cluster number */
 /*-----------------------------------------------------------------------*/
 
 //static
-//·Ç¾²Ì¬º¯Êı,ÒÔ±»Íâ²¿µ÷ÓÃ
+//éé™æ€å‡½æ•°,ä»¥è¢«å¤–éƒ¨è°ƒç”¨
 FRESULT dir_sdi (
 	DIR* dp,		/* Pointer to directory object */
 	UINT idx		/* Index of directory table */

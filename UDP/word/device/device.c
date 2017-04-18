@@ -64,7 +64,7 @@ void USART1_Init(void)
  
 int fputc(int ch, FILE *f)
 {
-/* ½«PrintfÄÚÈİ·¢Íù´®¿Ú */
+/* å°†Printfå†…å®¹å‘å¾€ä¸²å£ */
   USART_SendData(USART1, (unsigned char) ch);
   while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); 
   return (ch);
@@ -100,16 +100,16 @@ void USART1_IRQHandler(void)
 void set_network(void)
 {
   uint8 ip[4];
-  setSHAR(ConfigMsg.mac);/*ÅäÖÃMacµØÖ·*/
-  setSUBR(ConfigMsg.sub);/*ÅäÖÃ×ÓÍøÑÚÂë*/
-  setGAR(ConfigMsg.gw);/*ÅäÖÃÄ¬ÈÏÍø¹Ø*/
-  setSIPR(ConfigMsg.lip);/*ÅäÖÃIpµØÖ·*/
+  setSHAR(ConfigMsg.mac);/*é…ç½®Macåœ°å€*/
+  setSUBR(ConfigMsg.sub);/*é…ç½®å­ç½‘æ©ç */
+  setGAR(ConfigMsg.gw);/*é…ç½®é»˜è®¤ç½‘å…³*/
+  setSIPR(ConfigMsg.lip);/*é…ç½®Ipåœ°å€*/
 
   //Init. TX & RX Memory size of w5500
-  sysinit(txsize, rxsize); /*³õÊ¼»¯8¸ösocket*/
+  sysinit(txsize, rxsize); /*åˆå§‹åŒ–8ä¸ªsocket*/
   
-  setRTR(2000);/*ÉèÖÃÒç³öÊ±¼äÖµ*/
-  setRCR(3);/*ÉèÖÃ×î´óÖØĞÂ·¢ËÍ´ÎÊı*/
+  setRTR(2000);/*è®¾ç½®æº¢å‡ºæ—¶é—´å€¼*/
+  setRCR(3);/*è®¾ç½®æœ€å¤§é‡æ–°å‘é€æ¬¡æ•°*/
   
 
   getSIPR (ip);

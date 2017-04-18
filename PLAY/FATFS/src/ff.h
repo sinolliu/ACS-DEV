@@ -235,7 +235,7 @@ int f_putc (TCHAR c, FIL* fp);										/* Put a character to the file */
 int f_puts (const TCHAR* str, FIL* cp);								/* Put a string to the file */
 int f_printf (FIL* fp, const TCHAR* str, ...);						/* Put a formatted string to the file */
 TCHAR* f_gets (TCHAR* buff, int len, FIL* fp);						/* Get a string from the file */
-FRESULT dir_sdi (DIR* dp,UINT idx);									//供外部调用此函数
+FRESULT dir_sdi (DIR* dp,UINT idx);									//渚涘閮ㄨ皟鐢ㄦ鍑芥暟
 
 #define f_eof(fp) (((fp)->fptr == (fp)->fsize) ? 1 : 0)
 #define f_error(fp) ((fp)->err)

@@ -2,64 +2,64 @@
 #define __RECORDER_H
 #include "sys.h"	
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEKÕ½½¢STM32¿ª·¢°å
-//wavÂ¼ÒôÇı¶¯ ´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ĞŞ¸ÄÈÕÆÚ:2012/9/20
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEKæˆ˜èˆ°STM32å¼€å‘æ¿
+//wavå½•éŸ³é©±åŠ¨ ä»£ç 	   
+//æ­£ç‚¹åŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2012/9/20
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved								  						    								  
 //////////////////////////////////////////////////////////////////////////////////
 	   															 
- //RIFF¿é
+ //RIFFå—
 typedef __packed struct
 {
-    u32 ChunkID;		   	//chunk id;ÕâÀï¹Ì¶¨Îª"RIFF",¼´0X46464952
-    u32 ChunkSize ;		   	//¼¯ºÏ´óĞ¡;ÎÄ¼ş×Ü´óĞ¡-8
-    u32 Format;	   			//¸ñÊ½;WAVE,¼´0X45564157
+    u32 ChunkID;		   	//chunk id;è¿™é‡Œå›ºå®šä¸º"RIFF",å³0X46464952
+    u32 ChunkSize ;		   	//é›†åˆå¤§å°;æ–‡ä»¶æ€»å¤§å°-8
+    u32 Format;	   			//æ ¼å¼;WAVE,å³0X45564157
 }ChunkRIFF ;
-//fmt¿é
+//fmtå—
 typedef __packed struct
 {
-    u32 ChunkID;		   	//chunk id;ÕâÀï¹Ì¶¨Îª"fmt ",¼´0X20746D66
-    u32 ChunkSize ;		   	//×Ó¼¯ºÏ´óĞ¡(²»°üÀ¨IDºÍSize);ÕâÀïÎª:20.
-    u16 AudioFormat;	  	//ÒôÆµ¸ñÊ½;0X10,±íÊ¾ÏßĞÔPCM;0X11±íÊ¾IMA ADPCM
-	u16 NumOfChannels;		//Í¨µÀÊıÁ¿;1,±íÊ¾µ¥ÉùµÀ;2,±íÊ¾Ë«ÉùµÀ;
-	u32 SampleRate;			//²ÉÑùÂÊ;0X1F40,±íÊ¾8Khz
-	u32 ByteRate;			//×Ö½ÚËÙÂÊ; 
-	u16 BlockAlign;			//¿é¶ÔÆë(×Ö½Ú); 
-	u16 BitsPerSample;		//µ¥¸ö²ÉÑùÊı¾İ´óĞ¡;4Î»ADPCM,ÉèÖÃÎª4
-//	u16 ByteExtraData;		//¸½¼ÓµÄÊı¾İ×Ö½Ú;2¸ö; ÏßĞÔPCM,Ã»ÓĞÕâ¸ö²ÎÊı
-//	u16 ExtraData;			//¸½¼ÓµÄÊı¾İ,µ¥¸ö²ÉÑùÊı¾İ¿é´óĞ¡;0X1F9:505×Ö½Ú  ÏßĞÔPCM,Ã»ÓĞÕâ¸ö²ÎÊı
+    u32 ChunkID;		   	//chunk id;è¿™é‡Œå›ºå®šä¸º"fmt ",å³0X20746D66
+    u32 ChunkSize ;		   	//å­é›†åˆå¤§å°(ä¸åŒ…æ‹¬IDå’ŒSize);è¿™é‡Œä¸º:20.
+    u16 AudioFormat;	  	//éŸ³é¢‘æ ¼å¼;0X10,è¡¨ç¤ºçº¿æ€§PCM;0X11è¡¨ç¤ºIMA ADPCM
+	u16 NumOfChannels;		//é€šé“æ•°é‡;1,è¡¨ç¤ºå•å£°é“;2,è¡¨ç¤ºåŒå£°é“;
+	u32 SampleRate;			//é‡‡æ ·ç‡;0X1F40,è¡¨ç¤º8Khz
+	u32 ByteRate;			//å­—èŠ‚é€Ÿç‡; 
+	u16 BlockAlign;			//å—å¯¹é½(å­—èŠ‚); 
+	u16 BitsPerSample;		//å•ä¸ªé‡‡æ ·æ•°æ®å¤§å°;4ä½ADPCM,è®¾ç½®ä¸º4
+//	u16 ByteExtraData;		//é™„åŠ çš„æ•°æ®å­—èŠ‚;2ä¸ª; çº¿æ€§PCM,æ²¡æœ‰è¿™ä¸ªå‚æ•°
+//	u16 ExtraData;			//é™„åŠ çš„æ•°æ®,å•ä¸ªé‡‡æ ·æ•°æ®å—å¤§å°;0X1F9:505å­—èŠ‚  çº¿æ€§PCM,æ²¡æœ‰è¿™ä¸ªå‚æ•°
 }ChunkFMT;	   
-//fact¿é 
+//factå— 
 typedef __packed struct 
 {
-    u32 ChunkID;		   	//chunk id;ÕâÀï¹Ì¶¨Îª"fact",¼´0X74636166;
-    u32 ChunkSize ;		   	//×Ó¼¯ºÏ´óĞ¡(²»°üÀ¨IDºÍSize);ÕâÀïÎª:4.
-    u32 NumOfSamples;	  	//²ÉÑùµÄÊıÁ¿; 
+    u32 ChunkID;		   	//chunk id;è¿™é‡Œå›ºå®šä¸º"fact",å³0X74636166;
+    u32 ChunkSize ;		   	//å­é›†åˆå¤§å°(ä¸åŒ…æ‹¬IDå’ŒSize);è¿™é‡Œä¸º:4.
+    u32 NumOfSamples;	  	//é‡‡æ ·çš„æ•°é‡; 
 }ChunkFACT;
-//data¿é 
+//dataå— 
 typedef __packed struct 
 {
-    u32 ChunkID;		   	//chunk id;ÕâÀï¹Ì¶¨Îª"data",¼´0X61746164
-    u32 ChunkSize ;		   	//×Ó¼¯ºÏ´óĞ¡(²»°üÀ¨IDºÍSize);ÎÄ¼ş´óĞ¡-60.
+    u32 ChunkID;		   	//chunk id;è¿™é‡Œå›ºå®šä¸º"data",å³0X61746164
+    u32 ChunkSize ;		   	//å­é›†åˆå¤§å°(ä¸åŒ…æ‹¬IDå’ŒSize);æ–‡ä»¶å¤§å°-60.
 }ChunkDATA;
 
-//wavÍ·
+//wavå¤´
 typedef __packed struct
 { 
-	ChunkRIFF riff;	//riff¿é
-	ChunkFMT fmt;  	//fmt¿é
-	//ChunkFACT fact;	//fact¿é ÏßĞÔPCM,Ã»ÓĞÕâ¸ö½á¹¹Ìå	 
-	ChunkDATA data;	//data¿é		 
+	ChunkRIFF riff;	//riffå—
+	ChunkFMT fmt;  	//fmtå—
+	//ChunkFACT fact;	//factå— çº¿æ€§PCM,æ²¡æœ‰è¿™ä¸ªç»“æ„ä½“	 
+	ChunkDATA data;	//dataå—		 
 }__WaveHeader; 
 	 		
 void recoder_enter_rec_mode(u16 agc);
-void recoder_wav_init(__WaveHeader* wavhead);//³õÊ¼»¯WAVÍ·	
+void recoder_wav_init(__WaveHeader* wavhead);//åˆå§‹åŒ–WAVå¤´	
 void recoder_show_agc(u8 agc);		   
 void recoder_show_time(u32 tsec);
 u8 recoder_play(void);		   	 				    		 

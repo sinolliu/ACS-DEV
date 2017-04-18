@@ -57,7 +57,7 @@
 / Locale and Namespace Configurations
 /---------------------------------------------------------------------------*/
 
-#define _CODE_PAGE	936		//²ÉÓÃÖĞÎÄGBK±àÂë
+#define _CODE_PAGE	936		//é‡‡ç”¨ä¸­æ–‡GBKç¼–ç 
 /* The _CODE_PAGE specifies the OEM code page to be used on the target system.
 /  Incorrect setting of the code page can cause a file open failure.
 /
@@ -89,7 +89,7 @@
 /   1    - ASCII (Valid for only non-LFN cfg.) */
 
 
-#define	_USE_LFN	3		/* 0 to 3 ÉèÖÃÎª1,Ö§³Ö³¤ÎÄ¼şÃû£¬²¢²ÉÓÃ¶¯Ì¬ÄÚ´æ*/
+#define	_USE_LFN	3		/* 0 to 3 è®¾ç½®ä¸º1,æ”¯æŒé•¿æ–‡ä»¶åï¼Œå¹¶é‡‡ç”¨åŠ¨æ€å†…å­˜*/
 #define	_MAX_LFN	255		/* Maximum LFN length to handle (12 to 255) */
 /* The _USE_LFN option switches the LFN feature.
 /

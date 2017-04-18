@@ -1,38 +1,38 @@
 #include "dac.h"
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌÐòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßÐí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK MiniSTM32¿ª·¢°å
-//DAC ´úÂë	   
-//ÕýµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ÐÞ¸ÄÈÕÆÚ:2014/3/9
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓÐ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖÝÊÐÐÇÒíµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºŽå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEK MiniSTM32å¼€å‘æ¿
+//DAC ä»£ç 	   
+//æ­£ç‚¹åŽŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2014/3/9
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·žå¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved									  
 //////////////////////////////////////////////////////////////////////////////////
 
-//DACÍ¨µÀ1Êä³ö³õÊ¼»¯
+//DACé€šé“1è¾“å‡ºåˆå§‹åŒ–
 void Dac1_Init(void)
 {
-	RCC->APB2ENR|=1<<2;    //Ê¹ÄÜPORTAÊ±ÖÓ	  	
-	RCC->APB1ENR|=1<<29;   //Ê¹ÄÜDACÊ±ÖÓ	  	
+	RCC->APB2ENR|=1<<2;    //ä½¿èƒ½PORTAæ—¶é’Ÿ	  	
+	RCC->APB1ENR|=1<<29;   //ä½¿èƒ½DACæ—¶é’Ÿ	  	
 	   	 
 	GPIOA->CRL&=0XFFF0FFFF; 
-	GPIOA->CRL|=0X00000000;//PA4 Ä£ÄâÊäÈë    
+	GPIOA->CRL|=0X00000000;//PA4 æ¨¡æ‹Ÿè¾“å…¥    
 
-	DAC->CR|=1<<0;	//Ê¹ÄÜDAC1
-	DAC->CR|=1<<1;	//DAC1Êä³ö»º´æ²»Ê¹ÄÜ BOFF1=1
-	DAC->CR|=0<<2;	//²»Ê¹ÓÃ´¥·¢¹¦ÄÜ TEN1=0
-	DAC->CR|=0<<3;	//DAC TIM6 TRGO,²»¹ýÒªTEN1=1²ÅÐÐ
-	DAC->CR|=0<<6;	//²»Ê¹ÓÃ²¨ÐÎ·¢Éú
-	DAC->CR|=0<<8;	//ÆÁ±Î¡¢·ùÖµÉèÖÃ
-	DAC->CR|=0<<12;	//DAC1 DMA²»Ê¹ÄÜ    
+	DAC->CR|=1<<0;	//ä½¿èƒ½DAC1
+	DAC->CR|=1<<1;	//DAC1è¾“å‡ºç¼“å­˜ä¸ä½¿èƒ½ BOFF1=1
+	DAC->CR|=0<<2;	//ä¸ä½¿ç”¨è§¦å‘åŠŸèƒ½ TEN1=0
+	DAC->CR|=0<<3;	//DAC TIM6 TRGO,ä¸è¿‡è¦TEN1=1æ‰è¡Œ
+	DAC->CR|=0<<6;	//ä¸ä½¿ç”¨æ³¢å½¢å‘ç”Ÿ
+	DAC->CR|=0<<8;	//å±è”½ã€å¹…å€¼è®¾ç½®
+	DAC->CR|=0<<12;	//DAC1 DMAä¸ä½¿èƒ½    
 
 	DAC->DHR12R1=0;
 }
-//ÉèÖÃÍ¨µÀ1Êä³öµçÑ¹
-//vol:0~3300,´ú±í0~3.3V
+//è®¾ç½®é€šé“1è¾“å‡ºç”µåŽ‹
+//vol:0~3300,ä»£è¡¨0~3.3V
 void Dac1_Set_Vol(u16 vol)
 {
 	float temp=vol;

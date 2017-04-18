@@ -12,28 +12,28 @@
 #include "flash.h"
 #include "malloc.h"		
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32¿ª·¢°å
-//FATFS disio.c Çı¶¯´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ĞŞ¸ÄÈÕÆÚ:2014/3/14
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEK STM32å¼€å‘æ¿
+//FATFS disio.c é©±åŠ¨ä»£ç 	   
+//æ­£ç‚¹åŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2014/3/14
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved									  
 ////////////////////////////////////////////////////////////////////////////////// 
 
-#define SD_CARD	 0  //SD¿¨,¾í±êÎª0
-#define EX_FLASH 1	//Íâ²¿flash,¾í±êÎª1
+#define SD_CARD	 0  //SDå¡,å·æ ‡ä¸º0
+#define EX_FLASH 1	//å¤–éƒ¨flash,å·æ ‡ä¸º1
 
 #define FLASH_SECTOR_SIZE 	512			  
-//¶ÔÓÚW25Q64 
-//Ç°4.8M×Ö½Ú¸øfatfsÓÃ,4.8M×Ö½Úºó~4.8M+100K¸øÓÃ»§ÓÃ,4.9MÒÔºó,ÓÃÓÚ´æ·Å×Ö¿â,×Ö¿âÕ¼ÓÃ3.09M.		 			    
-u16	    FLASH_SECTOR_COUNT= 9832;	//4.8M×Ö½Ú,Ä¬ÈÏÎªW25Q64
-#define FLASH_BLOCK_SIZE   	8     	//Ã¿¸öBLOCKÓĞ8¸öÉÈÇø
+//å¯¹äºW25Q64 
+//å‰4.8Må­—èŠ‚ç»™fatfsç”¨,4.8Må­—èŠ‚å~4.8M+100Kç»™ç”¨æˆ·ç”¨,4.9Mä»¥å,ç”¨äºå­˜æ”¾å­—åº“,å­—åº“å ç”¨3.09M.		 			    
+u16	    FLASH_SECTOR_COUNT= 9832;	//4.8Må­—èŠ‚,é»˜è®¤ä¸ºW25Q64
+#define FLASH_BLOCK_SIZE   	8     	//æ¯ä¸ªBLOCKæœ‰8ä¸ªæ‰‡åŒº
 
-//³õÊ¼»¯´ÅÅÌ
+//åˆå§‹åŒ–ç£ç›˜
 DSTATUS disk_initialize (
 	BYTE pdrv				/* Physical drive nmuber (0..) */
 )
@@ -41,28 +41,28 @@ DSTATUS disk_initialize (
 	u8 res=0;	    
 	switch(pdrv)
 	{
-		case SD_CARD://SD¿¨
+		case SD_CARD://SDå¡
 			res = SD_Initialize();//SD_Initialize() 
-		 	if(res)//STM32 SPIµÄbug,ÔÚsd¿¨²Ù×÷Ê§°ÜµÄÊ±ºòÈç¹û²»Ö´ĞĞÏÂÃæµÄÓï¾ä,¿ÉÄÜµ¼ÖÂSPI¶ÁĞ´Òì³£
+		 	if(res)//STM32 SPIçš„bug,åœ¨sdå¡æ“ä½œå¤±è´¥çš„æ—¶å€™å¦‚æœä¸æ‰§è¡Œä¸‹é¢çš„è¯­å¥,å¯èƒ½å¯¼è‡´SPIè¯»å†™å¼‚å¸¸
 			{
 				SD_SPI_SpeedLow();
-				SD_SPI_ReadWriteByte(0xff);//Ìá¹©¶îÍâµÄ8¸öÊ±ÖÓ
+				SD_SPI_ReadWriteByte(0xff);//æä¾›é¢å¤–çš„8ä¸ªæ—¶é’Ÿ
 				SD_SPI_SpeedHigh();
 			}
   			break;
-		case EX_FLASH://Íâ²¿flash
+		case EX_FLASH://å¤–éƒ¨flash
 			SPI_Flash_Init();
 			if(SPI_FLASH_TYPE==W25Q64)FLASH_SECTOR_COUNT=9832;	//W25Q64
-			else FLASH_SECTOR_COUNT=0;							//ÆäËû
+			else FLASH_SECTOR_COUNT=0;							//å…¶ä»–
  			break;
 		default:
 			res=1; 
 	}		 
 	if(res)return  STA_NOINIT;
-	else return 0; //³õÊ¼»¯³É¹¦
+	else return 0; //åˆå§‹åŒ–æˆåŠŸ
 }  
 
-//»ñµÃ´ÅÅÌ×´Ì¬
+//è·å¾—ç£ç›˜çŠ¶æ€
 DSTATUS disk_status (
 	BYTE pdrv		/* Physical drive nmuber (0..) */
 )
@@ -70,11 +70,11 @@ DSTATUS disk_status (
 	return 0;
 } 
 
-//¶ÁÉÈÇø
-//drv:´ÅÅÌ±àºÅ0~9
-//*buff:Êı¾İ½ÓÊÕ»º³åÊ×µØÖ·
-//sector:ÉÈÇøµØÖ·
-//count:ĞèÒª¶ÁÈ¡µÄÉÈÇøÊı
+//è¯»æ‰‡åŒº
+//drv:ç£ç›˜ç¼–å·0~9
+//*buff:æ•°æ®æ¥æ”¶ç¼“å†²é¦–åœ°å€
+//sector:æ‰‡åŒºåœ°å€
+//count:éœ€è¦è¯»å–çš„æ‰‡åŒºæ•°
 DRESULT disk_read (
 	BYTE pdrv,		/* Physical drive nmuber (0..) */
 	BYTE *buff,		/* Data buffer to store read data */
@@ -83,19 +83,19 @@ DRESULT disk_read (
 )
 {
 	u8 res=0; 
-    if (!count)return RES_PARERR;//count²»ÄÜµÈÓÚ0£¬·ñÔò·µ»Ø²ÎÊı´íÎó		 	 
+    if (!count)return RES_PARERR;//countä¸èƒ½ç­‰äº0ï¼Œå¦åˆ™è¿”å›å‚æ•°é”™è¯¯		 	 
 	switch(pdrv)
 	{
-		case SD_CARD://SD¿¨
+		case SD_CARD://SDå¡
 			res=SD_ReadDisk(buff,sector,count);	 
-		 	if(res)//STM32 SPIµÄbug,ÔÚsd¿¨²Ù×÷Ê§°ÜµÄÊ±ºòÈç¹û²»Ö´ĞĞÏÂÃæµÄÓï¾ä,¿ÉÄÜµ¼ÖÂSPI¶ÁĞ´Òì³£
+		 	if(res)//STM32 SPIçš„bug,åœ¨sdå¡æ“ä½œå¤±è´¥çš„æ—¶å€™å¦‚æœä¸æ‰§è¡Œä¸‹é¢çš„è¯­å¥,å¯èƒ½å¯¼è‡´SPIè¯»å†™å¼‚å¸¸
 			{
 				SD_SPI_SpeedLow();
-				SD_SPI_ReadWriteByte(0xff);//Ìá¹©¶îÍâµÄ8¸öÊ±ÖÓ
+				SD_SPI_ReadWriteByte(0xff);//æä¾›é¢å¤–çš„8ä¸ªæ—¶é’Ÿ
 				SD_SPI_SpeedHigh();
 			}
 			break;
-		case EX_FLASH://Íâ²¿flash
+		case EX_FLASH://å¤–éƒ¨flash
 			for(;count>0;count--)
 			{
 				SPI_Flash_Read(buff,sector*FLASH_SECTOR_SIZE,FLASH_SECTOR_SIZE);
@@ -107,16 +107,16 @@ DRESULT disk_read (
 		default:
 			res=1; 
 	}
-   //´¦Àí·µ»ØÖµ£¬½«SPI_SD_driver.cµÄ·µ»ØÖµ×ª³Éff.cµÄ·µ»ØÖµ
+   //å¤„ç†è¿”å›å€¼ï¼Œå°†SPI_SD_driver.cçš„è¿”å›å€¼è½¬æˆff.cçš„è¿”å›å€¼
     if(res==0x00)return RES_OK;	 
     else return RES_ERROR;	   
 }
 
-//Ğ´ÉÈÇø
-//drv:´ÅÅÌ±àºÅ0~9
-//*buff:·¢ËÍÊı¾İÊ×µØÖ·
-//sector:ÉÈÇøµØÖ·
-//count:ĞèÒªĞ´ÈëµÄÉÈÇøÊı
+//å†™æ‰‡åŒº
+//drv:ç£ç›˜ç¼–å·0~9
+//*buff:å‘é€æ•°æ®é¦–åœ°å€
+//sector:æ‰‡åŒºåœ°å€
+//count:éœ€è¦å†™å…¥çš„æ‰‡åŒºæ•°
 #if _USE_WRITE
 DRESULT disk_write (
 	BYTE pdrv,			/* Physical drive nmuber (0..) */
@@ -126,13 +126,13 @@ DRESULT disk_write (
 )
 {
 	u8 res=0;  
-    if (!count)return RES_PARERR;//count²»ÄÜµÈÓÚ0£¬·ñÔò·µ»Ø²ÎÊı´íÎó		 	 
+    if (!count)return RES_PARERR;//countä¸èƒ½ç­‰äº0ï¼Œå¦åˆ™è¿”å›å‚æ•°é”™è¯¯		 	 
 	switch(pdrv)
 	{
-		case SD_CARD://SD¿¨
+		case SD_CARD://SDå¡
 			res=SD_WriteDisk((u8*)buff,sector,count);
 			break;
-		case EX_FLASH://Íâ²¿flash
+		case EX_FLASH://å¤–éƒ¨flash
 			for(;count>0;count--)
 			{										    
 				SPI_Flash_Write((u8*)buff,sector*FLASH_SECTOR_SIZE,FLASH_SECTOR_SIZE);
@@ -144,17 +144,17 @@ DRESULT disk_write (
 		default:
 			res=1; 
 	}
-    //´¦Àí·µ»ØÖµ£¬½«SPI_SD_driver.cµÄ·µ»ØÖµ×ª³Éff.cµÄ·µ»ØÖµ
+    //å¤„ç†è¿”å›å€¼ï¼Œå°†SPI_SD_driver.cçš„è¿”å›å€¼è½¬æˆff.cçš„è¿”å›å€¼
     if(res == 0x00)return RES_OK;	 
     else return RES_ERROR;	
 }
 #endif
 
 
-//ÆäËû±í²ÎÊıµÄ»ñµÃ
- //drv:´ÅÅÌ±àºÅ0~9
- //ctrl:¿ØÖÆ´úÂë
- //*buff:·¢ËÍ/½ÓÊÕ»º³åÇøÖ¸Õë
+//å…¶ä»–è¡¨å‚æ•°çš„è·å¾—
+ //drv:ç£ç›˜ç¼–å·0~9
+ //ctrl:æ§åˆ¶ä»£ç 
+ //*buff:å‘é€/æ¥æ”¶ç¼“å†²åŒºæŒ‡é’ˆ
 #if _USE_IOCTL
 DRESULT disk_ioctl (
 	BYTE pdrv,		/* Physical drive nmuber (0..) */
@@ -163,7 +163,7 @@ DRESULT disk_ioctl (
 )
 {
 	DRESULT res;						  			     
-	if(pdrv==SD_CARD)//SD¿¨
+	if(pdrv==SD_CARD)//SDå¡
 	{
 	    switch(cmd)
 	    {
@@ -189,7 +189,7 @@ DRESULT disk_ioctl (
 		        res = RES_PARERR;
 		        break;
 	    }
-	}else if(pdrv==EX_FLASH)	//Íâ²¿FLASH  
+	}else if(pdrv==EX_FLASH)	//å¤–éƒ¨FLASH  
 	{
 	    switch(cmd)
 	    {
@@ -212,11 +212,11 @@ DRESULT disk_ioctl (
 		        res = RES_PARERR;
 		        break;
 	    }
-	}else res=RES_ERROR;//ÆäËûµÄ²»Ö§³Ö
+	}else res=RES_ERROR;//å…¶ä»–çš„ä¸æ”¯æŒ
     return res;
 }
 #endif
-//»ñµÃÊ±¼ä
+//è·å¾—æ—¶é—´
 //User defined function to give a current time to fatfs module      */
 //31-25: Year(0-127 org.1980), 24-21: Month(1-12), 20-16: Day(1-31) */                                                                                                                                                                                                                                          
 //15-11: Hour(0-23), 10-5: Minute(0-59), 4-0: Second(0-29 *2) */                                                                                                                                                                                                                                                
@@ -224,12 +224,12 @@ DWORD get_fattime (void)
 {				 
 	return 0;
 }			 
-//¶¯Ì¬·ÖÅäÄÚ´æ
+//åŠ¨æ€åˆ†é…å†…å­˜
 void *ff_memalloc (UINT size)			
 {
 	return (void*)mymalloc(size);
 }
-//ÊÍ·ÅÄÚ´æ
+//é‡Šæ”¾å†…å­˜
 void ff_memfree (void* mf)		 
 {
 	myfree(mf);

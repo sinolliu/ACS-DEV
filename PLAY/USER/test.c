@@ -13,28 +13,28 @@
 #include "text.h"	
 #include "vs10XX.h"	
 #include "mp3player.h"
-//ALIENTEK Mini STM32¿ª·¢°åÀ©Õ¹ÊµÑé4
-//MP3²¥·ÅÆ÷ÊµÑé
-//¼¼ÊõÖ§³Ö£ºwww.openedv.com
-//¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾  
+//ALIENTEK Mini STM32å¼€å‘æ¿æ‰©å±•å®éªŒ4
+//MP3æ’­æ”¾å™¨å®éªŒ
+//æŠ€æœ¯æ”¯æŒï¼šwww.openedv.com
+//å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸  
     							   	 
 int main(void)
 {		 
 	u8 key,fontok=0; 
-   	Stm32_Clock_Init(9);	//ÏµÍ³Ê±ÖÓÉèÖÃ
-	delay_init(72);			//ÑÓÊ±³õÊ¼»¯
-	uart_init(72,9600); 	//´®¿Ú1³õÊ¼»¯  	  
-	LCD_Init();				//³õÊ¼»¯Òº¾§ 
-	LED_Init();         	//LED³õÊ¼»¯	 
-	KEY_Init();				//°´¼ü³õÊ¼»¯	  	
-	VS_Init();				//³õÊ¼»¯VS1053													    
-	usmart_dev.init(72);	//usmart³õÊ¼»¯	
- 	mem_init();				//³õÊ¼»¯ÄÚ´æ³Ø	    
- 	exfuns_init();			//ÎªfatfsÏà¹Ø±äÁ¿ÉêÇëÄÚ´æ  
-  	f_mount(fs[0],"0:",1); 	//¹ÒÔØSD¿¨ 
- 	f_mount(fs[1],"1:",1); 	//¹ÒÔØFLASH.
+   	Stm32_Clock_Init(9);	//ç³»ç»Ÿæ—¶é’Ÿè®¾ç½®
+	delay_init(72);			//å»¶æ—¶åˆå§‹åŒ–
+	uart_init(72,9600); 	//ä¸²å£1åˆå§‹åŒ–  	  
+	LCD_Init();				//åˆå§‹åŒ–æ¶²æ™¶ 
+	LED_Init();         	//LEDåˆå§‹åŒ–	 
+	KEY_Init();				//æŒ‰é”®åˆå§‹åŒ–	  	
+	VS_Init();				//åˆå§‹åŒ–VS1053													    
+	usmart_dev.init(72);	//usmartåˆå§‹åŒ–	
+ 	mem_init();				//åˆå§‹åŒ–å†…å­˜æ± 	    
+ 	exfuns_init();			//ä¸ºfatfsç›¸å…³å˜é‡ç”³è¯·å†…å­˜  
+  	f_mount(fs[0],"0:",1); 	//æŒ‚è½½SDå¡ 
+ 	f_mount(fs[1],"1:",1); 	//æŒ‚è½½FLASH.
 RST:
- 	POINT_COLOR=RED;//ÉèÖÃ×ÖÌåÎªºìÉ«	   
+ 	POINT_COLOR=RED;//è®¾ç½®å­—ä½“ä¸ºçº¢è‰²	   
 	LCD_ShowString(60,50,200,16,16,"Mini STM32");	
 	LCD_ShowString(60,70,200,16,16,"Music Player TEST");	
 	LCD_ShowString(60,90,200,16,16,"ATOM@ALIENTEK");
@@ -48,16 +48,16 @@ RST:
 		LCD_Fill(20,170,200+20,170+16,WHITE);
 		delay_ms(200);		       
 	}
-	fontok=font_init();		//¼ì²é×Ö¿âÊÇ·ñOK 
-	if(fontok)				//ĞèÒª¸üĞÂ×Ö¿â				 
+	fontok=font_init();		//æ£€æŸ¥å­—åº“æ˜¯å¦OK 
+	if(fontok)				//éœ€è¦æ›´æ–°å­—åº“				 
 	{							  
-        LCD_Clear(WHITE);		   	//ÇåÆÁ
- 		POINT_COLOR=RED;			//ÉèÖÃ×ÖÌåÎªºìÉ«	   	   	  
+        LCD_Clear(WHITE);		   	//æ¸…å±
+ 		POINT_COLOR=RED;			//è®¾ç½®å­—ä½“ä¸ºçº¢è‰²	   	   	  
 		LCD_ShowString(60,50,200,16,16,"ALIENTEK STM32"); 
 		LCD_ShowString(60,70,200,16,16,"SD Card OK");
 		LCD_ShowString(60,90,200,16,16,"Font Updating...");
-		key=update_font(20,110,16);//´ÓSD¿¨¸üĞÂ×Ö¿â
-		while(key)//¸üĞÂÊ§°Ü		
+		key=update_font(20,110,16);//ä»SDå¡æ›´æ–°å­—åº“
+		while(key)//æ›´æ–°å¤±è´¥		
 		{			 		  
 			LCD_ShowString(60,110,200,16,16,"Font Update Failed!");
 			delay_ms(200);
@@ -66,16 +66,16 @@ RST:
 		} 		  
 		LCD_ShowString(60,110,200,16,16,"Font Update Success!");
 		delay_ms(1500);	
-		LCD_Clear(WHITE);//ÇåÆÁ	 
+		LCD_Clear(WHITE);//æ¸…å±	 
 		goto RST;
 	}   		    
 	while(1)
 	{
-		Show_Str(60,170,200,16,"´æ´¢Æ÷²âÊÔ...",16,0);
-		printf("Ram Test:0X%04X\r\n",VS_Ram_Test());//´òÓ¡RAM²âÊÔ½á¹û	    
-		Show_Str(60,170,200,16,"ÕıÏÒ²¨²âÊÔ...",16,0);
+		Show_Str(60,170,200,16,"å­˜å‚¨å™¨æµ‹è¯•...",16,0);
+		printf("Ram Test:0X%04X\r\n",VS_Ram_Test());//æ‰“å°RAMæµ‹è¯•ç»“æœ	    
+		Show_Str(60,170,200,16,"æ­£å¼¦æ³¢æµ‹è¯•...",16,0);
  		VS_Sine_Test();	   
-		Show_Str(60,170,200,16,"<<ÒôÀÖ²¥·ÅÆ÷>>",16,0); 
+		Show_Str(60,170,200,16,"<<éŸ³ä¹æ’­æ”¾å™¨>>",16,0); 
 		mp3_play();
 	}
 }

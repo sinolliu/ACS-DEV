@@ -2,36 +2,36 @@
 #define __MYCT_IIC_H
 #include "sys.h"	    
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌÐòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßÐí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32¿ª·¢°å
-//4.3´çµçÈÝ´¥ÃþÆÁÇý¶¯-IICÍ¨ÐÅ²¿·Ö	  
-//ÕýµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ÐÞ¸ÄÈÕÆÚ:2014/3/11
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓÐ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖÝÊÐÐÇÒíµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºŽå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEK STM32å¼€å‘æ¿
+//4.3å¯¸ç”µå®¹è§¦æ‘¸å±é©±åŠ¨-IICé€šä¿¡éƒ¨åˆ†	  
+//æ­£ç‚¹åŽŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2014/3/11
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·žå¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved	 
 //////////////////////////////////////////////////////////////////////////////////
    	   		   
-//IO·½ÏòÉèÖÃ
+//IOæ–¹å‘è®¾ç½®
 #define CT_SDA_IN()  {GPIOC->CRL&=0XFFFF0FFF;GPIOC->CRL|=8<<4*3;}
 #define CT_SDA_OUT() {GPIOC->CRL&=0XFFFF0FFF;GPIOC->CRL|=3<<4*3;}
 
-//IO²Ù×÷º¯Êý	 
+//IOæ“ä½œå‡½æ•°	 
 #define CT_IIC_SCL    PCout(0) 			//SCL     
 #define CT_IIC_SDA    PCout(3) 			//SDA	 
-#define CT_READ_SDA   PCin(3)  			//ÊäÈëSDA 
+#define CT_READ_SDA   PCin(3)  			//è¾“å…¥SDA 
 
-//IICËùÓÐ²Ù×÷º¯Êý
-void CT_IIC_Init(void);                	//³õÊ¼»¯IICµÄIO¿Ú				 
-void CT_IIC_Start(void);				//·¢ËÍIIC¿ªÊ¼ÐÅºÅ
-void CT_IIC_Stop(void);	  				//·¢ËÍIICÍ£Ö¹ÐÅºÅ
-void CT_IIC_Send_Byte(u8 txd);			//IIC·¢ËÍÒ»¸ö×Ö½Ú
-u8 CT_IIC_Read_Byte(unsigned char ack);	//IIC¶ÁÈ¡Ò»¸ö×Ö½Ú
-u8 CT_IIC_Wait_Ack(void); 				//IICµÈ´ýACKÐÅºÅ
-void CT_IIC_Ack(void);					//IIC·¢ËÍACKÐÅºÅ
-void CT_IIC_NAck(void);					//IIC²»·¢ËÍACKÐÅºÅ
+//IICæ‰€æœ‰æ“ä½œå‡½æ•°
+void CT_IIC_Init(void);                	//åˆå§‹åŒ–IICçš„IOå£				 
+void CT_IIC_Start(void);				//å‘é€IICå¼€å§‹ä¿¡å·
+void CT_IIC_Stop(void);	  				//å‘é€IICåœæ­¢ä¿¡å·
+void CT_IIC_Send_Byte(u8 txd);			//IICå‘é€ä¸€ä¸ªå­—èŠ‚
+u8 CT_IIC_Read_Byte(unsigned char ack);	//IICè¯»å–ä¸€ä¸ªå­—èŠ‚
+u8 CT_IIC_Wait_Ack(void); 				//IICç­‰å¾…ACKä¿¡å·
+void CT_IIC_Ack(void);					//IICå‘é€ACKä¿¡å·
+void CT_IIC_NAck(void);					//IICä¸å‘é€ACKä¿¡å·
 
 #endif
 

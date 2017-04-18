@@ -132,7 +132,7 @@ void get_seconds_from_ntp_server(uint8_t *buf, uint16_t idx)
 	case 20:
 		seconds -=  1*3600;
 		break;
-	case 21:                            //ï¼?
+	case 21:                            //é”›?
 	case 22:
 		break;
 	case 23:

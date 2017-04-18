@@ -11,20 +11,20 @@
 #include "text.h"	    
     
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEKÕ½½¢STM32¿ª·¢°å
-//wavÂ¼ÒôÇı¶¯ ´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ĞŞ¸ÄÈÕÆÚ:2012/9/20
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEKæˆ˜èˆ°STM32å¼€å‘æ¿
+//wavå½•éŸ³é©±åŠ¨ ä»£ç 	   
+//æ­£ç‚¹åŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2012/9/20
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved								  						    								  
 //////////////////////////////////////////////////////////////////////////////////
 	
 
-//VS1053µÄWAVÂ¼ÒôÓĞbug,Õâ¸öplugin¿ÉÒÔĞŞÕıÕâ¸öÎÊÌâ 							    
+//VS1053çš„WAVå½•éŸ³æœ‰bug,è¿™ä¸ªpluginå¯ä»¥ä¿®æ­£è¿™ä¸ªé—®é¢˜ 							    
 const u16 wav_plugin[40]=/* Compressed plugin */ 
 { 
 0x0007, 0x0001, 0x8010, 0x0006, 0x001c, 0x3e12, 0xb817, 0x3e14, /* 0 */ 
@@ -33,57 +33,57 @@ const u16 wav_plugin[40]=/* Compressed plugin */
 0x8024, 0x3b81, 0x8024, 0x3f04, 0xc024, 0x2808, 0x4800, 0x36f1, /* 18 */ 
 0x9811, 0x0007, 0x0001, 0x8028, 0x0006, 0x0002, 0x2a00, 0x040e,  
 }; 
-//¼¤»îPCM Â¼ÒôÄ£Ê½
-//agc:0,×Ô¶¯ÔöÒæ.1024Ïàµ±ÓÚ1±¶,512Ïàµ±ÓÚ0.5±¶,×î´óÖµ65535=64±¶		  
+//æ¿€æ´»PCM å½•éŸ³æ¨¡å¼
+//agc:0,è‡ªåŠ¨å¢ç›Š.1024ç›¸å½“äº1å€,512ç›¸å½“äº0.5å€,æœ€å¤§å€¼65535=64å€		  
 void recoder_enter_rec_mode(u16 agc)
 {
-	//Èç¹ûÊÇIMA ADPCM,²ÉÑùÂÊ¼ÆËã¹«Ê½ÈçÏÂ:
- 	//²ÉÑùÂÊ=CLKI/256*d;	
-	//¼ÙÉèd=0,²¢2±¶Æµ,Íâ²¿¾§ÕñÎª12.288M.ÄÇÃ´Fc=(2*12288000)/256*6=16Khz
-	//Èç¹ûÊÇÏßĞÔPCM,²ÉÑùÂÊÖ±½Ó¾ÍĞ´²ÉÑùÖµ 
+	//å¦‚æœæ˜¯IMA ADPCM,é‡‡æ ·ç‡è®¡ç®—å…¬å¼å¦‚ä¸‹:
+ 	//é‡‡æ ·ç‡=CLKI/256*d;	
+	//å‡è®¾d=0,å¹¶2å€é¢‘,å¤–éƒ¨æ™¶æŒ¯ä¸º12.288M.é‚£ä¹ˆFc=(2*12288000)/256*6=16Khz
+	//å¦‚æœæ˜¯çº¿æ€§PCM,é‡‡æ ·ç‡ç›´æ¥å°±å†™é‡‡æ ·å€¼ 
    	VS_WR_Cmd(SPI_BASS,0x0000);    
- 	VS_WR_Cmd(SPI_AICTRL0,8000);	//ÉèÖÃ²ÉÑùÂÊ,ÉèÖÃÎª8Khz
- 	VS_WR_Cmd(SPI_AICTRL1,agc);		//ÉèÖÃÔöÒæ,0,×Ô¶¯ÔöÒæ.1024Ïàµ±ÓÚ1±¶,512Ïàµ±ÓÚ0.5±¶,×î´óÖµ65535=64±¶	
- 	VS_WR_Cmd(SPI_AICTRL2,0);		//ÉèÖÃÔöÒæ×î´óÖµ,0,´ú±í×î´óÖµ65536=64X
- 	VS_WR_Cmd(SPI_AICTRL3,6);		//×óÍ¨µÀ(MICµ¥ÉùµÀÊäÈë)
-	VS_WR_Cmd(SPI_CLOCKF,0X2000);	//ÉèÖÃVS10XXµÄÊ±ÖÓ,MULT:2±¶Æµ;ADD:²»ÔÊĞí;CLK:12.288Mhz
-	VS_WR_Cmd(SPI_MODE,0x1804);		//MIC,Â¼Òô¼¤»î    
- 	delay_ms(5);					//µÈ´ıÖÁÉÙ1.35ms 
- 	VS_Load_Patch((u16*)wav_plugin,40);//VS1053µÄWAVÂ¼ÒôĞèÒªpatch
+ 	VS_WR_Cmd(SPI_AICTRL0,8000);	//è®¾ç½®é‡‡æ ·ç‡,è®¾ç½®ä¸º8Khz
+ 	VS_WR_Cmd(SPI_AICTRL1,agc);		//è®¾ç½®å¢ç›Š,0,è‡ªåŠ¨å¢ç›Š.1024ç›¸å½“äº1å€,512ç›¸å½“äº0.5å€,æœ€å¤§å€¼65535=64å€	
+ 	VS_WR_Cmd(SPI_AICTRL2,0);		//è®¾ç½®å¢ç›Šæœ€å¤§å€¼,0,ä»£è¡¨æœ€å¤§å€¼65536=64X
+ 	VS_WR_Cmd(SPI_AICTRL3,6);		//å·¦é€šé“(MICå•å£°é“è¾“å…¥)
+	VS_WR_Cmd(SPI_CLOCKF,0X2000);	//è®¾ç½®VS10XXçš„æ—¶é’Ÿ,MULT:2å€é¢‘;ADD:ä¸å…è®¸;CLK:12.288Mhz
+	VS_WR_Cmd(SPI_MODE,0x1804);		//MIC,å½•éŸ³æ¿€æ´»    
+ 	delay_ms(5);					//ç­‰å¾…è‡³å°‘1.35ms 
+ 	VS_Load_Patch((u16*)wav_plugin,40);//VS1053çš„WAVå½•éŸ³éœ€è¦patch
 }
 
-//³õÊ¼»¯WAVÍ·.
-void recoder_wav_init(__WaveHeader* wavhead) //³õÊ¼»¯WAVÍ·			   
+//åˆå§‹åŒ–WAVå¤´.
+void recoder_wav_init(__WaveHeader* wavhead) //åˆå§‹åŒ–WAVå¤´			   
 {
 	wavhead->riff.ChunkID=0X46464952;	//"RIFF"
-	wavhead->riff.ChunkSize=0;			//»¹Î´È·¶¨,×îºóĞèÒª¼ÆËã
+	wavhead->riff.ChunkSize=0;			//è¿˜æœªç¡®å®š,æœ€åéœ€è¦è®¡ç®—
 	wavhead->riff.Format=0X45564157; 	//"WAVE"
 	wavhead->fmt.ChunkID=0X20746D66; 	//"fmt "
-	wavhead->fmt.ChunkSize=16; 			//´óĞ¡Îª16¸ö×Ö½Ú
-	wavhead->fmt.AudioFormat=0X01; 		//0X01,±íÊ¾PCM;0X01,±íÊ¾IMA ADPCM
- 	wavhead->fmt.NumOfChannels=1;		//µ¥ÉùµÀ
- 	wavhead->fmt.SampleRate=8000;		//8Khz²ÉÑùÂÊ ²ÉÑùËÙÂÊ
- 	wavhead->fmt.ByteRate=wavhead->fmt.SampleRate*2;//16Î»,¼´2¸ö×Ö½Ú
- 	wavhead->fmt.BlockAlign=2;			//¿é´óĞ¡,2¸ö×Ö½ÚÎªÒ»¸ö¿é
- 	wavhead->fmt.BitsPerSample=16;		//16Î»PCM
+	wavhead->fmt.ChunkSize=16; 			//å¤§å°ä¸º16ä¸ªå­—èŠ‚
+	wavhead->fmt.AudioFormat=0X01; 		//0X01,è¡¨ç¤ºPCM;0X01,è¡¨ç¤ºIMA ADPCM
+ 	wavhead->fmt.NumOfChannels=1;		//å•å£°é“
+ 	wavhead->fmt.SampleRate=8000;		//8Khzé‡‡æ ·ç‡ é‡‡æ ·é€Ÿç‡
+ 	wavhead->fmt.ByteRate=wavhead->fmt.SampleRate*2;//16ä½,å³2ä¸ªå­—èŠ‚
+ 	wavhead->fmt.BlockAlign=2;			//å—å¤§å°,2ä¸ªå­—èŠ‚ä¸ºä¸€ä¸ªå—
+ 	wavhead->fmt.BitsPerSample=16;		//16ä½PCM
    	wavhead->data.ChunkID=0X61746164;	//"data"
- 	wavhead->data.ChunkSize=0;			//Êı¾İ´óĞ¡,»¹ĞèÒª¼ÆËã  
+ 	wavhead->data.ChunkSize=0;			//æ•°æ®å¤§å°,è¿˜éœ€è¦è®¡ç®—  
 }
 							    
-//ÏÔÊ¾Â¼ÒôÊ±³¤
-//x,y:µØÖ·
-//tsec:ÃëÖÓÊı.
+//æ˜¾ç¤ºå½•éŸ³æ—¶é•¿
+//x,y:åœ°å€
+//tsec:ç§’é’Ÿæ•°.
 void recoder_show_time(u32 tsec)
 {   
-	//ÏÔÊ¾Â¼ÒôÊ±¼ä			 
+	//æ˜¾ç¤ºå½•éŸ³æ—¶é—´			 
 	LCD_ShowString(60,250,200,16,16,"TIME:");	  	  
-	LCD_ShowxNum(60+40,250,tsec/60,2,16,0X80);	//·ÖÖÓ
+	LCD_ShowxNum(60+40,250,tsec/60,2,16,0X80);	//åˆ†é’Ÿ
 	LCD_ShowChar(60+56,250,':',16,0);
-	LCD_ShowxNum(60+64,250,tsec%60,2,16,0X80);	//ÃëÖÓ		
+	LCD_ShowxNum(60+64,250,tsec%60,2,16,0X80);	//ç§’é’Ÿ		
 }  	   
-//Í¨¹ıÊ±¼ä»ñÈ¡ÎÄ¼şÃû
-//½öÏŞÔÚSD¿¨±£´æ,²»Ö§³ÖFLASH DISK±£´æ
-//×éºÏ³É:ĞÎÈç"0:RECORDER/REC20120321210633.wav"µÄÎÄ¼şÃû
+//é€šè¿‡æ—¶é—´è·å–æ–‡ä»¶å
+//ä»…é™åœ¨SDå¡ä¿å­˜,ä¸æ”¯æŒFLASH DISKä¿å­˜
+//ç»„åˆæˆ:å½¢å¦‚"0:RECORDER/REC20120321210633.wav"çš„æ–‡ä»¶å
 void recoder_new_pathname(u8 *pname)
 {	 
 	u8 res;					 
@@ -91,22 +91,22 @@ void recoder_new_pathname(u8 *pname)
 	while(index<0XFFFF)
 	{
 		sprintf((char*)pname,"0:RECORDER/REC%05d.wav",index);
-		res=f_open(ftemp,(const TCHAR*)pname,FA_READ);//³¢ÊÔ´ò¿ªÕâ¸öÎÄ¼ş
-		if(res==FR_NO_FILE)break;		//¸ÃÎÄ¼şÃû²»´æÔÚ=ÕıÊÇÎÒÃÇĞèÒªµÄ.
+		res=f_open(ftemp,(const TCHAR*)pname,FA_READ);//å°è¯•æ‰“å¼€è¿™ä¸ªæ–‡ä»¶
+		if(res==FR_NO_FILE)break;		//è¯¥æ–‡ä»¶åä¸å­˜åœ¨=æ­£æ˜¯æˆ‘ä»¬éœ€è¦çš„.
 		index++;
 	}
 }
-//ÏÔÊ¾AGC´óĞ¡
-//x,y:×ø±ê
-//agc:ÔöÒæÖµ 1~15,±íÊ¾1~15±¶;0,±íÊ¾×Ô¶¯ÔöÒæ
+//æ˜¾ç¤ºAGCå¤§å°
+//x,y:åæ ‡
+//agc:å¢ç›Šå€¼ 1~15,è¡¨ç¤º1~15å€;0,è¡¨ç¤ºè‡ªåŠ¨å¢ç›Š
 void recoder_show_agc(u8 agc)
 {  
-	LCD_ShowString(60+110,250,200,16,16,"AGC:    ");	  	//ÏÔÊ¾Ãû³Æ,Í¬Ê±Çå³şÉÏ´ÎµÄÏÔÊ¾	  
-	if(agc==0)LCD_ShowString(60+142,250,200,16,16,"AUTO");	//×Ô¶¯agc	  	  
-	else LCD_ShowxNum(60+142,250,agc,2,16,0X80);			//ÏÔÊ¾AGCÖµ	 
+	LCD_ShowString(60+110,250,200,16,16,"AGC:    ");	  	//æ˜¾ç¤ºåç§°,åŒæ—¶æ¸…æ¥šä¸Šæ¬¡çš„æ˜¾ç¤º	  
+	if(agc==0)LCD_ShowString(60+142,250,200,16,16,"AUTO");	//è‡ªåŠ¨agc	  	  
+	else LCD_ShowxNum(60+142,250,agc,2,16,0X80);			//æ˜¾ç¤ºAGCå€¼	 
 } 
 
-//²¥·ÅpnameÕâ¸öwavÎÄ¼ş£¨Ò²¿ÉÒÔÊÇMP3µÈ£©		 
+//æ’­æ”¾pnameè¿™ä¸ªwavæ–‡ä»¶ï¼ˆä¹Ÿå¯ä»¥æ˜¯MP3ç­‰ï¼‰		 
 u8 rec_play_wav(u8 *pname)
 {	 
  	FIL* fmp3;
@@ -114,41 +114,41 @@ u8 rec_play_wav(u8 *pname)
 	u8 res,rval=0;	  
 	u8 *databuf;	   		   
 	u16 i=0; 	 		  
-	fmp3=(FIL*)mymalloc(sizeof(FIL));//ÉêÇëÄÚ´æ
-	databuf=(u8*)mymalloc(512);		//¿ª±Ù512×Ö½ÚµÄÄÚ´æÇøÓò
-	if(databuf==NULL||fmp3==NULL)rval=0XFF ;//ÄÚ´æÉêÇëÊ§°Ü.
+	fmp3=(FIL*)mymalloc(sizeof(FIL));//ç”³è¯·å†…å­˜
+	databuf=(u8*)mymalloc(512);		//å¼€è¾Ÿ512å­—èŠ‚çš„å†…å­˜åŒºåŸŸ
+	if(databuf==NULL||fmp3==NULL)rval=0XFF ;//å†…å­˜ç”³è¯·å¤±è´¥.
 	if(rval==0)
 	{	  
-		VS_HD_Reset();		   	//Ó²¸´Î»
-		VS_Soft_Reset();  		//Èí¸´Î» 
-		VS_Set_Vol(220);		//ÉèÖÃÒôÁ¿  			 
-		VS_Reset_DecodeTime();	//¸´Î»½âÂëÊ±¼ä 	  	 
-		res=f_open(fmp3,(const TCHAR*)pname,FA_READ);//´ò¿ªÎÄ¼ş	 
- 		if(res==0)//´ò¿ª³É¹¦.
+		VS_HD_Reset();		   	//ç¡¬å¤ä½
+		VS_Soft_Reset();  		//è½¯å¤ä½ 
+		VS_Set_Vol(220);		//è®¾ç½®éŸ³é‡  			 
+		VS_Reset_DecodeTime();	//å¤ä½è§£ç æ—¶é—´ 	  	 
+		res=f_open(fmp3,(const TCHAR*)pname,FA_READ);//æ‰“å¼€æ–‡ä»¶	 
+ 		if(res==0)//æ‰“å¼€æˆåŠŸ.
 		{ 
-			VS_SPI_SpeedHigh();	//¸ßËÙ						   
+			VS_SPI_SpeedHigh();	//é«˜é€Ÿ						   
 			while(rval==0)
 			{
-				res=f_read(fmp3,databuf,512,(UINT*)&br);//¶Á³ö4096¸ö×Ö½Ú  
+				res=f_read(fmp3,databuf,512,(UINT*)&br);//è¯»å‡º4096ä¸ªå­—èŠ‚  
 				i=0;
-				do//Ö÷²¥·ÅÑ­»·
+				do//ä¸»æ’­æ”¾å¾ªç¯
 			    {  	
-					if(VS_Send_MusicData(databuf+i)==0)i+=32;//¸øVS10XX·¢ËÍÒôÆµÊı¾İ
-				 	else recoder_show_time(VS_Get_DecodeTime());//ÏÔÊ¾²¥·ÅÊ±¼ä	   	    
-				}while(i<512);//Ñ­»··¢ËÍ4096¸ö×Ö½Ú 
+					if(VS_Send_MusicData(databuf+i)==0)i+=32;//ç»™VS10XXå‘é€éŸ³é¢‘æ•°æ®
+				 	else recoder_show_time(VS_Get_DecodeTime());//æ˜¾ç¤ºæ’­æ”¾æ—¶é—´	   	    
+				}while(i<512);//å¾ªç¯å‘é€4096ä¸ªå­—èŠ‚ 
 				if(br!=512||res!=0)
 				{
 					rval=0;
-					break;//¶ÁÍêÁË.		  
+					break;//è¯»å®Œäº†.		  
 				} 							 
 			}
 			f_close(fmp3);
-		}else rval=0XFF;//³öÏÖ´íÎó	   	  
+		}else rval=0XFF;//å‡ºç°é”™è¯¯	   	  
 	}						    
 	return rval;	  	 		  	    
 }	 
-//Â¼Òô»ú
-//ËùÓĞÂ¼ÒôÎÄ¼ş,¾ù±£´æÔÚSD¿¨RECORDERÎÄ¼ş¼ĞÄÚ.
+//å½•éŸ³æœº
+//æ‰€æœ‰å½•éŸ³æ–‡ä»¶,å‡ä¿å­˜åœ¨SDå¡RECORDERæ–‡ä»¶å¤¹å†….
 u8 recoder_play(void)
 {
 	u8 res;
@@ -156,136 +156,136 @@ u8 recoder_play(void)
 	u8 rval=0;
 	__WaveHeader *wavhead=0;
 	u32 sectorsize=0;
-	FIL* f_rec=0;					//ÎÄ¼ş		    
- 	DIR recdir;	 					//Ä¿Â¼
-	u8 *recbuf;						//Êı¾İÄÚ´æ	 
+	FIL* f_rec=0;					//æ–‡ä»¶		    
+ 	DIR recdir;	 					//ç›®å½•
+	u8 *recbuf;						//æ•°æ®å†…å­˜	 
  	u16 w;
 	u16 idx=0;	    
-	u8 rec_sta=0;					//Â¼Òô×´Ì¬
-									//[7]:0,Ã»ÓĞÂ¼Òô;1,ÓĞÂ¼Òô;
-									//[6:1]:±£Áô
-									//[0]:0,ÕıÔÚÂ¼Òô;1,ÔİÍ£Â¼Òô;
+	u8 rec_sta=0;					//å½•éŸ³çŠ¶æ€
+									//[7]:0,æ²¡æœ‰å½•éŸ³;1,æœ‰å½•éŸ³;
+									//[6:1]:ä¿ç•™
+									//[0]:0,æ­£åœ¨å½•éŸ³;1,æš‚åœå½•éŸ³;
  	u8 *pname=0;
-	u8 timecnt=0;					//¼ÆÊ±Æ÷   
-	u32 recsec=0;					//Â¼ÒôÊ±¼ä
- 	u8 recagc=4;					//Ä¬ÈÏÔöÒæÎª4 
-	u8 playFlag=0;					//²¥·Å±êÖ¾
-  	while(f_opendir(&recdir,"0:/RECORDER"))//´ò¿ªÂ¼ÒôÎÄ¼ş¼Ğ
+	u8 timecnt=0;					//è®¡æ—¶å™¨   
+	u32 recsec=0;					//å½•éŸ³æ—¶é—´
+ 	u8 recagc=4;					//é»˜è®¤å¢ç›Šä¸º4 
+	u8 playFlag=0;					//æ’­æ”¾æ ‡å¿—
+  	while(f_opendir(&recdir,"0:/RECORDER"))//æ‰“å¼€å½•éŸ³æ–‡ä»¶å¤¹
  	{	 
-		Show_Str(60,230,240,16,"RECORDERÎÄ¼ş¼Ğ´íÎó!",16,0);
+		Show_Str(60,230,240,16,"RECORDERæ–‡ä»¶å¤¹é”™è¯¯!",16,0);
 		delay_ms(200);				  
-		LCD_Fill(60,230,240,246,WHITE);		//Çå³ıÏÔÊ¾	     
+		LCD_Fill(60,230,240,246,WHITE);		//æ¸…é™¤æ˜¾ç¤º	     
 		delay_ms(200);				  
-		f_mkdir("0:/RECORDER");				//´´½¨¸ÃÄ¿Â¼   
+		f_mkdir("0:/RECORDER");				//åˆ›å»ºè¯¥ç›®å½•   
 	} 
-  	f_rec=(FIL *)mymalloc(sizeof(FIL));	//¿ª±ÙFIL×Ö½ÚµÄÄÚ´æÇøÓò 
-	if(f_rec==NULL)rval=1;	//ÉêÇëÊ§°Ü
- 	wavhead=(__WaveHeader*)mymalloc(sizeof(__WaveHeader));//¿ª±Ù__WaveHeader×Ö½ÚµÄÄÚ´æÇøÓò
+  	f_rec=(FIL *)mymalloc(sizeof(FIL));	//å¼€è¾ŸFILå­—èŠ‚çš„å†…å­˜åŒºåŸŸ 
+	if(f_rec==NULL)rval=1;	//ç”³è¯·å¤±è´¥
+ 	wavhead=(__WaveHeader*)mymalloc(sizeof(__WaveHeader));//å¼€è¾Ÿ__WaveHeaderå­—èŠ‚çš„å†…å­˜åŒºåŸŸ
 	if(wavhead==NULL)rval=1; 
 	recbuf=mymalloc(512); 	
 	if(recbuf==NULL)rval=1;	  		   
-	pname=mymalloc(30);					//ÉêÇë30¸ö×Ö½ÚÄÚ´æ,ÀàËÆ"0:RECORDER/REC00001.wav"
+	pname=mymalloc(30);					//ç”³è¯·30ä¸ªå­—èŠ‚å†…å­˜,ç±»ä¼¼"0:RECORDER/REC00001.wav"
 	if(pname==NULL)rval=1;
- 	if(rval==0)									//ÄÚ´æÉêÇëOK
+ 	if(rval==0)									//å†…å­˜ç”³è¯·OK
 	{      
  		recoder_enter_rec_mode(1024*recagc);				
-   		while(VS_RD_Reg(SPI_HDAT1)>>8);			//µÈµ½buf ½ÏÎª¿ÕÏĞÔÙ¿ªÊ¼  
-  		recoder_show_time(recsec);				//ÏÔÊ¾Ê±¼ä
-		recoder_show_agc(recagc);				//ÏÔÊ¾agc
-		pname[0]=0;								//pnameÃ»ÓĞÈÎºÎÎÄ¼şÃû		 
+   		while(VS_RD_Reg(SPI_HDAT1)>>8);			//ç­‰åˆ°buf è¾ƒä¸ºç©ºé—²å†å¼€å§‹  
+  		recoder_show_time(recsec);				//æ˜¾ç¤ºæ—¶é—´
+		recoder_show_agc(recagc);				//æ˜¾ç¤ºagc
+		pname[0]=0;								//pnameæ²¡æœ‰ä»»ä½•æ–‡ä»¶å		 
  	   	while(rval==0)
 		{
 			key=KEY_Scan(0);
 			switch(key)
 			{		
 				case KEY0_PRES:	//STOP&SAVE
-					if(rec_sta&0X80)//ÓĞÂ¼Òô
+					if(rec_sta&0X80)//æœ‰å½•éŸ³
 					{
-						wavhead->riff.ChunkSize=sectorsize*512+36;	//Õû¸öÎÄ¼şµÄ´óĞ¡-8;
-				   		wavhead->data.ChunkSize=sectorsize*512;		//Êı¾İ´óĞ¡
-						f_lseek(f_rec,0);							//Æ«ÒÆµ½ÎÄ¼şÍ·.
-				  		f_write(f_rec,(const void*)wavhead,sizeof(__WaveHeader),&bw);//Ğ´ÈëÍ·Êı¾İ
+						wavhead->riff.ChunkSize=sectorsize*512+36;	//æ•´ä¸ªæ–‡ä»¶çš„å¤§å°-8;
+				   		wavhead->data.ChunkSize=sectorsize*512;		//æ•°æ®å¤§å°
+						f_lseek(f_rec,0);							//åç§»åˆ°æ–‡ä»¶å¤´.
+				  		f_write(f_rec,(const void*)wavhead,sizeof(__WaveHeader),&bw);//å†™å…¥å¤´æ•°æ®
 						f_close(f_rec);
 						sectorsize=0;
 					}
 					rec_sta=0;
 					recsec=0;
-				 	LED1=1;	 						//¹Ø±ÕDS1
-					LCD_Fill(60,230,240,246,WHITE);	//Çå³ıÏÔÊ¾,Çå³ıÖ®Ç°ÏÔÊ¾µÄÂ¼ÒôÎÄ¼şÃû	     
-					recoder_show_time(recsec);		//ÏÔÊ¾Ê±¼ä
+				 	LED1=1;	 						//å…³é—­DS1
+					LCD_Fill(60,230,240,246,WHITE);	//æ¸…é™¤æ˜¾ç¤º,æ¸…é™¤ä¹‹å‰æ˜¾ç¤ºçš„å½•éŸ³æ–‡ä»¶å	     
+					recoder_show_time(recsec);		//æ˜¾ç¤ºæ—¶é—´
 					break;	 
 				case KEY1_PRES:	//REC/PAUSE
-					if(rec_sta&0X01)//Ô­À´ÊÇÔİÍ£,¼ÌĞøÂ¼Òô
+					if(rec_sta&0X01)//åŸæ¥æ˜¯æš‚åœ,ç»§ç»­å½•éŸ³
 					{
-						rec_sta&=0XFE;//È¡ÏûÔİÍ£
-					}else if(rec_sta&0X80)//ÒÑ¾­ÔÚÂ¼ÒôÁË,ÔİÍ£
+						rec_sta&=0XFE;//å–æ¶ˆæš‚åœ
+					}else if(rec_sta&0X80)//å·²ç»åœ¨å½•éŸ³äº†,æš‚åœ
 					{
-						rec_sta|=0X01;	//ÔİÍ£
-					}else				//»¹Ã»¿ªÊ¼Â¼Òô 
+						rec_sta|=0X01;	//æš‚åœ
+					}else				//è¿˜æ²¡å¼€å§‹å½•éŸ³ 
 					{
-	 					rec_sta|=0X80;	//¿ªÊ¼Â¼Òô	 	 
-						recoder_new_pathname(pname);			//µÃµ½ĞÂµÄÃû×Ö
-						Show_Str(60,230,240,16,pname+11,16,0);	//ÏÔÊ¾µ±Ç°Â¼ÒôÎÄ¼şÃû×Ö
-				 		recoder_wav_init(wavhead);				//³õÊ¼»¯wavÊı¾İ	
+	 					rec_sta|=0X80;	//å¼€å§‹å½•éŸ³	 	 
+						recoder_new_pathname(pname);			//å¾—åˆ°æ–°çš„åå­—
+						Show_Str(60,230,240,16,pname+11,16,0);	//æ˜¾ç¤ºå½“å‰å½•éŸ³æ–‡ä»¶åå­—
+				 		recoder_wav_init(wavhead);				//åˆå§‹åŒ–wavæ•°æ®	
 	 					res=f_open(f_rec,(const TCHAR*)pname, FA_CREATE_ALWAYS | FA_WRITE); 
-						if(res)			//ÎÄ¼ş´´½¨Ê§°Ü
+						if(res)			//æ–‡ä»¶åˆ›å»ºå¤±è´¥
 						{
-							rec_sta=0;	//´´½¨ÎÄ¼şÊ§°Ü,²»ÄÜÂ¼Òô
-							rval=0XFE;	//ÌáÊ¾ÊÇ·ñ´æÔÚSD¿¨
-						}else res=f_write(f_rec,(const void*)wavhead,sizeof(__WaveHeader),&bw);//Ğ´ÈëÍ·Êı¾İ
+							rec_sta=0;	//åˆ›å»ºæ–‡ä»¶å¤±è´¥,ä¸èƒ½å½•éŸ³
+							rval=0XFE;	//æç¤ºæ˜¯å¦å­˜åœ¨SDå¡
+						}else res=f_write(f_rec,(const void*)wavhead,sizeof(__WaveHeader),&bw);//å†™å…¥å¤´æ•°æ®
 	 				} 
 					break;
-			  case WKUP_PRES://²¥·ÅÂ¼Òô£¨½öÔÚ·ÇÂ¼Òô×´Ì¬ÏÂÓĞĞ§£©
+			  case WKUP_PRES://æ’­æ”¾å½•éŸ³ï¼ˆä»…åœ¨éå½•éŸ³çŠ¶æ€ä¸‹æœ‰æ•ˆï¼‰
 				   if(rec_sta==0)playFlag=1;
 				   break;
 			} 
 ///////////////////////////////////////////////////////////
-//¶ÁÈ¡Êı¾İ			  
-			if(rec_sta==0X80)//ÒÑ¾­ÔÚÂ¼ÒôÁË
+//è¯»å–æ•°æ®			  
+			if(rec_sta==0X80)//å·²ç»åœ¨å½•éŸ³äº†
 			{
 		  		w=VS_RD_Reg(SPI_HDAT1);	
 				if((w>=256)&&(w<896))
 				{
 	 				idx=0;				   	 
-		  			while(idx<512) 	//Ò»´Î¶ÁÈ¡512×Ö½Ú
+		  			while(idx<512) 	//ä¸€æ¬¡è¯»å–512å­—èŠ‚
 					{	 
 			 			w=VS_RD_Reg(SPI_HDAT0);				   	    
 		 				recbuf[idx++]=w&0XFF;
 						recbuf[idx++]=w>>8;
 					}	  		 
-	 				res=f_write(f_rec,recbuf,512,&bw);//Ğ´ÈëÎÄ¼ş
+	 				res=f_write(f_rec,recbuf,512,&bw);//å†™å…¥æ–‡ä»¶
 					if(res)
 					{
 						printf("err:%d\r\n",res);
 						printf("bw:%d\r\n",bw);
-						break;//Ğ´Èë³ö´í.	  
+						break;//å†™å…¥å‡ºé”™.	  
 					}
-					sectorsize++;//ÉÈÇøÊıÔö¼Ó1,Ô¼Îª32ms	 
+					sectorsize++;//æ‰‡åŒºæ•°å¢åŠ 1,çº¦ä¸º32ms	 
 				}			
-			}else//Ã»ÓĞ¿ªÊ¼Â¼Òô£¬°´KEY0²¥·ÅÒôÆµ
+			}else//æ²¡æœ‰å¼€å§‹å½•éŸ³ï¼ŒæŒ‰KEY0æ’­æ”¾éŸ³é¢‘
 			{								  
-				if(playFlag&&pname[0])//Èç¹ûwk_up°´¼ü±»°´ÏÂ,ÇÒpname²»Îª¿Õ
+				if(playFlag&&pname[0])//å¦‚æœwk_upæŒ‰é”®è¢«æŒ‰ä¸‹,ä¸”pnameä¸ä¸ºç©º
 				{				 
-					Show_Str(60,230,240,16,"²¥·Å:",16,0);		   
-					Show_Str(60+40,230,240,16,pname+11,16,0);	//ÏÔÊ¾µ±²¥·ÅµÄÎÄ¼şÃû×Ö   
-					rec_play_wav(pname);						//²¥·Åpname
-					LCD_Fill(60,230,240,246,WHITE);				//Çå³ıÏÔÊ¾,Çå³ıÖ®Ç°ÏÔÊ¾µÄÂ¼ÒôÎÄ¼şÃû	  
-					recoder_enter_rec_mode(1024*recagc);		//ÖØĞÂ½øÈëÂ¼ÒôÄ£Ê½		
-			   		while(VS_RD_Reg(SPI_HDAT1)>>8);				//µÈµ½buf ½ÏÎª¿ÕÏĞÔÙ¿ªÊ¼  
-			  		recoder_show_time(recsec);					//ÏÔÊ¾Ê±¼ä
-					recoder_show_agc(recagc);					//ÏÔÊ¾agc 
+					Show_Str(60,230,240,16,"æ’­æ”¾:",16,0);		   
+					Show_Str(60+40,230,240,16,pname+11,16,0);	//æ˜¾ç¤ºå½“æ’­æ”¾çš„æ–‡ä»¶åå­—   
+					rec_play_wav(pname);						//æ’­æ”¾pname
+					LCD_Fill(60,230,240,246,WHITE);				//æ¸…é™¤æ˜¾ç¤º,æ¸…é™¤ä¹‹å‰æ˜¾ç¤ºçš„å½•éŸ³æ–‡ä»¶å	  
+					recoder_enter_rec_mode(1024*recagc);		//é‡æ–°è¿›å…¥å½•éŸ³æ¨¡å¼		
+			   		while(VS_RD_Reg(SPI_HDAT1)>>8);				//ç­‰åˆ°buf è¾ƒä¸ºç©ºé—²å†å¼€å§‹  
+			  		recoder_show_time(recsec);					//æ˜¾ç¤ºæ—¶é—´
+					recoder_show_agc(recagc);					//æ˜¾ç¤ºagc 
 					playFlag = 0;
  				}
 				delay_ms(5);
 				timecnt++;
-				if((timecnt%20)==0)LED1=!LED1;//DS1ÉÁË¸ 
+				if((timecnt%20)==0)LED1=!LED1;//DS1é—ªçƒ 
 			}
 /////////////////////////////////////////////////////////////
- 			if(recsec!=(sectorsize*4/125))//Â¼ÒôÊ±¼äÏÔÊ¾
+ 			if(recsec!=(sectorsize*4/125))//å½•éŸ³æ—¶é—´æ˜¾ç¤º
 			{	   
-				LED1=!LED1;//DS0ÉÁË¸ 
+				LED1=!LED1;//DS0é—ªçƒ 
 				recsec=sectorsize*4/125;
-				recoder_show_time(recsec);//ÏÔÊ¾Ê±¼ä
+				recoder_show_time(recsec);//æ˜¾ç¤ºæ—¶é—´
 			}
 		}					   
 	}	   		   				    

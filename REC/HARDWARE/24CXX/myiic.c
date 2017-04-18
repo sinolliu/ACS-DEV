@@ -1,56 +1,56 @@
 #include "myiic.h"
 #include "delay.h"
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌÐòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßÐí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK MiniSTM32¿ª·¢°å
-//IICÇý¶¯ ´úÂë	   
-//ÕýµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//ÐÞ¸ÄÈÕÆÚ:2014/3/9
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓÐ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖÝÊÐÐÇÒíµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾ 2009-2019
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºŽå…¶å®ƒä»»ä½•ç”¨é€”
+//ALIENTEK MiniSTM32å¼€å‘æ¿
+//IICé©±åŠ¨ ä»£ç 	   
+//æ­£ç‚¹åŽŸå­@ALIENTEK
+//æŠ€æœ¯è®ºå›:www.openedv.com
+//ä¿®æ”¹æ—¥æœŸ:2014/3/9
+//ç‰ˆæœ¬ï¼šV1.0
+//ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+//Copyright(C) å¹¿å·žå¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
 //All rights reserved									  
 //////////////////////////////////////////////////////////////////////////////////
 
 
-//³õÊ¼»¯IIC
+//åˆå§‹åŒ–IIC
 void IIC_Init(void)
 {					     
- 	RCC->APB2ENR|=1<<4;//ÏÈÊ¹ÄÜÍâÉèIO PORTCÊ±ÖÓ 							 
-	GPIOC->CRH&=0XFFF00FFF;//PC11/12 ÍÆÍìÊä³ö
+ 	RCC->APB2ENR|=1<<4;//å…ˆä½¿èƒ½å¤–è®¾IO PORTCæ—¶é’Ÿ 							 
+	GPIOC->CRH&=0XFFF00FFF;//PC11/12 æŽ¨æŒ½è¾“å‡º
 	GPIOC->CRH|=0X00033000;	   
-	GPIOC->ODR|=3<<11;     //PC11,12 Êä³ö¸ß
+	GPIOC->ODR|=3<<11;     //PC11,12 è¾“å‡ºé«˜
 }
-//²úÉúIICÆðÊ¼ÐÅºÅ
+//äº§ç”ŸIICèµ·å§‹ä¿¡å·
 void IIC_Start(void)
 {
-	SDA_OUT();     //sdaÏßÊä³ö
+	SDA_OUT();     //sdaçº¿è¾“å‡º
 	IIC_SDA=1;	  	  
 	IIC_SCL=1;
 	delay_us(4);
  	IIC_SDA=0;//START:when CLK is high,DATA change form high to low 
 	delay_us(4);
-	IIC_SCL=0;//Ç¯×¡I2C×ÜÏß£¬×¼±¸·¢ËÍ»ò½ÓÊÕÊý¾Ý 
+	IIC_SCL=0;//é’³ä½I2Cæ€»çº¿ï¼Œå‡†å¤‡å‘é€æˆ–æŽ¥æ”¶æ•°æ® 
 }	  
-//²úÉúIICÍ£Ö¹ÐÅºÅ
+//äº§ç”ŸIICåœæ­¢ä¿¡å·
 void IIC_Stop(void)
 {
-	SDA_OUT();//sdaÏßÊä³ö
+	SDA_OUT();//sdaçº¿è¾“å‡º
 	IIC_SCL=0;
 	IIC_SDA=0;
  	delay_us(4); 
 	IIC_SCL=1;//STOP:when CLK is high DATA change form low to high
  	delay_us(4); 
-	IIC_SDA=1;//·¢ËÍI2C×ÜÏß½áÊøÐÅºÅ 						   	
+	IIC_SDA=1;//å‘é€I2Cæ€»çº¿ç»“æŸä¿¡å· 						   	
 }
-//µÈ´ýÓ¦´ðÐÅºÅµ½À´
-//·µ»ØÖµ£º1£¬½ÓÊÕÓ¦´ðÊ§°Ü
-//        0£¬½ÓÊÕÓ¦´ð³É¹¦
+//ç­‰å¾…åº”ç­”ä¿¡å·åˆ°æ¥
+//è¿”å›žå€¼ï¼š1ï¼ŒæŽ¥æ”¶åº”ç­”å¤±è´¥
+//        0ï¼ŒæŽ¥æ”¶åº”ç­”æˆåŠŸ
 u8 IIC_Wait_Ack(void)
 {
 	u8 ucErrTime=0;
-	SDA_IN();      //SDAÉèÖÃÎªÊäÈë  
+	SDA_IN();      //SDAè®¾ç½®ä¸ºè¾“å…¥  
 	IIC_SDA=1;delay_us(1);	   
 	IIC_SCL=1;delay_us(1);	 
 	while(READ_SDA)
@@ -62,10 +62,10 @@ u8 IIC_Wait_Ack(void)
 			return 1;
 		}
 	}
-	IIC_SCL=0;//Ê±ÖÓÊä³ö0 	   
+	IIC_SCL=0;//æ—¶é’Ÿè¾“å‡º0 	   
 	return 0;  
 } 
-//²úÉúACKÓ¦´ð
+//äº§ç”ŸACKåº”ç­”
 void IIC_Ack(void)
 {
 	IIC_SCL=0;
@@ -76,7 +76,7 @@ void IIC_Ack(void)
 	delay_us(2);
 	IIC_SCL=0;
 }
-//²»²úÉúACKÓ¦´ð		    
+//ä¸äº§ç”ŸACKåº”ç­”		    
 void IIC_NAck(void)
 {
 	IIC_SCL=0;
@@ -87,31 +87,31 @@ void IIC_NAck(void)
 	delay_us(2);
 	IIC_SCL=0;
 }					 				     
-//IIC·¢ËÍÒ»¸ö×Ö½Ú
-//·µ»Ø´Ó»úÓÐÎÞÓ¦´ð
-//1£¬ÓÐÓ¦´ð
-//0£¬ÎÞÓ¦´ð			  
+//IICå‘é€ä¸€ä¸ªå­—èŠ‚
+//è¿”å›žä»Žæœºæœ‰æ— åº”ç­”
+//1ï¼Œæœ‰åº”ç­”
+//0ï¼Œæ— åº”ç­”			  
 void IIC_Send_Byte(u8 txd)
 {                        
     u8 t;   
 	SDA_OUT(); 	    
-    IIC_SCL=0;//À­µÍÊ±ÖÓ¿ªÊ¼Êý¾Ý´«Êä
+    IIC_SCL=0;//æ‹‰ä½Žæ—¶é’Ÿå¼€å§‹æ•°æ®ä¼ è¾“
     for(t=0;t<8;t++)
     {              
         IIC_SDA=(txd&0x80)>>7;
         txd<<=1; 	  
-		delay_us(2);   //¶ÔTEA5767ÕâÈý¸öÑÓÊ±¶¼ÊÇ±ØÐëµÄ
+		delay_us(2);   //å¯¹TEA5767è¿™ä¸‰ä¸ªå»¶æ—¶éƒ½æ˜¯å¿…é¡»çš„
 		IIC_SCL=1;
 		delay_us(2); 
 		IIC_SCL=0;	
 		delay_us(2);
     }	 
 } 	    
-//¶Á1¸ö×Ö½Ú£¬ack=1Ê±£¬·¢ËÍACK£¬ack=0£¬·¢ËÍnACK   
+//è¯»1ä¸ªå­—èŠ‚ï¼Œack=1æ—¶ï¼Œå‘é€ACKï¼Œack=0ï¼Œå‘é€nACK   
 u8 IIC_Read_Byte(unsigned char ack)
 {
 	unsigned char i,receive=0;
-	SDA_IN();//SDAÉèÖÃÎªÊäÈë
+	SDA_IN();//SDAè®¾ç½®ä¸ºè¾“å…¥
     for(i=0;i<8;i++ )
 	{
         IIC_SCL=0; 
@@ -122,9 +122,9 @@ u8 IIC_Read_Byte(unsigned char ack)
 		delay_us(1); 
     }					 
     if (!ack)
-        IIC_NAck();//·¢ËÍnACK
+        IIC_NAck();//å‘é€nACK
     else
-        IIC_Ack(); //·¢ËÍACK   
+        IIC_Ack(); //å‘é€ACK   
     return receive;
 }
 

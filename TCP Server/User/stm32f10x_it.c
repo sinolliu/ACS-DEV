@@ -60,7 +60,7 @@ void EXTI9_5_IRQHandler(void)
 {
 	if(EXTI_GetITStatus(EXTI_Line6) != RESET)
 	{
-		ISR();//÷–∂œ¥¶¿Ì
+		ISR();//‰∏≠Êñ≠Â§ÑÁêÜ
 
 		EXTI_ClearITPendingBit(EXTI_Line6);       
 	}                  

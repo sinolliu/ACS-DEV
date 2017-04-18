@@ -13,43 +13,43 @@
 extern uint8 txsize[];
 extern uint8 rxsize[];
 
-uint8 buffer[2048];/*¶¨ÒåÒ»¸ö2KBµÄ»º´æ*/
+uint8 buffer[2048];/*å®šä¹‰ä¸€ä¸ª2KBçš„ç¼“å­˜*/
 
 int main(void)
 {
-  uint8 pc_ip[4]={192,168,1,101};/*ÅäÖÃ·şÎñÆ÷µÄIPµØÖ·*/
-  uint16 anyport=7000;/*¶¨ÒåÒ»¸öÈÎÒâ¶Ë¿Ú²¢³õÊ¼»¯*/
+  uint8 pc_ip[4]={192,168,1,101};/*é…ç½®æœåŠ¡å™¨çš„IPåœ°å€*/
+  uint16 anyport=7000;/*å®šä¹‰ä¸€ä¸ªä»»æ„ç«¯å£å¹¶åˆå§‹åŒ–*/
   uint16 len=0;
    
-  uint8 mac[6]={0x00,0x08,0xdc,0x11,0x11,0x11};/*¶¨ÒåMac±äÁ¿*/
-  uint8 lip[4]={192,168,1,111};/*¶¨Òålp±äÁ¿*/
-  uint8 sub[4]={255,255,255,0};/*¶¨Òåsubnet±äÁ¿*/
-  uint8 gw[4]={192,168,1,1};/*¶¨Òågateway±äÁ¿*/
+  uint8 mac[6]={0x00,0x08,0xdc,0x11,0x11,0x11};/*å®šä¹‰Macå˜é‡*/
+  uint8 lip[4]={192,168,1,111};/*å®šä¹‰lpå˜é‡*/
+  uint8 sub[4]={255,255,255,0};/*å®šä¹‰subnetå˜é‡*/
+  uint8 gw[4]={192,168,1,1};/*å®šä¹‰gatewayå˜é‡*/
   uint8 ip[4];
   
-  RCC_Configuration(); /* ÅäÖÃµ¥Æ¬»úÏµÍ³Ê±ÖÓ*/
-  GPIO_Configuration();/* ÅäÖÃGPIO*/
-  NVIC_Configuration();/* ÅäÖÃÇ¶Ì×ÖĞ¶ÏÏòÁ¿*/
+  RCC_Configuration(); /* é…ç½®å•ç‰‡æœºç³»ç»Ÿæ—¶é’Ÿ*/
+  GPIO_Configuration();/* é…ç½®GPIO*/
+  NVIC_Configuration();/* é…ç½®åµŒå¥—ä¸­æ–­å‘é‡*/
   
-  Systick_Init(72);/* ³õÊ¼»¯Systick¹¤×÷Ê±ÖÓ*/
-  USART1_Init(); /*³õÊ¼»¯´®¿ÚÍ¨ĞÅ:115200@8-n-1*/
-  at24c16_init();/*³õÊ¼»¯eeprom*/
+  Systick_Init(72);/* åˆå§‹åŒ–Systickå·¥ä½œæ—¶é’Ÿ*/
+  USART1_Init(); /*åˆå§‹åŒ–ä¸²å£é€šä¿¡:115200@8-n-1*/
+  at24c16_init();/*åˆå§‹åŒ–eeprom*/
   printf("W5500 EVB initialization over.\r\n");
   
-  Reset_W5500();/*Ó²ÖØÆôW5500*/
-  WIZ_SPI_Init();/*³õÊ¼»¯SPI½Ó¿Ú*/
+  Reset_W5500();/*ç¡¬é‡å¯W5500*/
+  WIZ_SPI_Init();/*åˆå§‹åŒ–SPIæ¥å£*/
   printf("W5500 initialized!\r\n");  
  
-  setSHAR(mac);/*ÅäÖÃMacµØÖ·*/
-  setSUBR(sub);/*ÅäÖÃ×ÓÍøÑÚÂë*/
-  setGAR(gw);/*ÅäÖÃÄ¬ÈÏÍø¹Ø*/
-  setSIPR(lip);/*ÅäÖÃIpµØÖ·*/
+  setSHAR(mac);/*é…ç½®Macåœ°å€*/
+  setSUBR(sub);/*é…ç½®å­ç½‘æ©ç */
+  setGAR(gw);/*é…ç½®é»˜è®¤ç½‘å…³*/
+  setSIPR(lip);/*é…ç½®Ipåœ°å€*/
   
     //Init. TX & RX Memory size of w5500
-  sysinit(txsize, rxsize); /*³õÊ¼»¯8¸ösocket*/
+  sysinit(txsize, rxsize); /*åˆå§‹åŒ–8ä¸ªsocket*/
   
-  setRTR(2000);/*ÉèÖÃÒç³öÊ±¼äÖµ*/
-  setRCR(3);/*ÉèÖÃ×î´óÖØĞÂ·¢ËÍ´ÎÊı*/
+  setRTR(2000);/*è®¾ç½®æº¢å‡ºæ—¶é—´å€¼*/
+  setRCR(3);/*è®¾ç½®æœ€å¤§é‡æ–°å‘é€æ¬¡æ•°*/
   
 
   getSIPR (ip);
@@ -62,29 +62,29 @@ int main(void)
   
   while(1)
   {
-    switch(getSn_SR(0))/*»ñÈ¡socket0µÄ×´Ì¬*/
+    switch(getSn_SR(0))/*è·å–socket0çš„çŠ¶æ€*/
     {
-       case SOCK_INIT:/*socket³õÊ¼»¯Íê³É*/
-         connect(0, pc_ip ,6000);/*ÔÚTCPÄ£Ê½ÏÂÏò·şÎñÆ÷·¢ËÍÁ¬½ÓÇëÇó*/ 
+       case SOCK_INIT:/*socketåˆå§‹åŒ–å®Œæˆ*/
+         connect(0, pc_ip ,6000);/*åœ¨TCPæ¨¡å¼ä¸‹å‘æœåŠ¡å™¨å‘é€è¿æ¥è¯·æ±‚*/ 
          break;
-       case SOCK_ESTABLISHED:/*socketÁ¬½Ó½¨Á¢*/
+       case SOCK_ESTABLISHED:/*socketè¿æ¥å»ºç«‹*/
          if(getSn_IR(0) & Sn_IR_CON)
          {
-            setSn_IR(0, Sn_IR_CON);/*Sn_IRµÄµÚ0Î»ÖÃ1*/
+            setSn_IR(0, Sn_IR_CON);/*Sn_IRçš„ç¬¬0ä½ç½®1*/
           }
         
-         len=getSn_RX_RSR(0);/*lenÎªÒÑ½ÓÊÕÊı¾İµÄ´óĞ¡*/
+         len=getSn_RX_RSR(0);/*lenä¸ºå·²æ¥æ”¶æ•°æ®çš„å¤§å°*/
          if(len>0)
          {
-            recv(0,buffer,len);/*W5500½ÓÊÕÀ´×ÔSeverµÄÊı¾İ*/
+            recv(0,buffer,len);/*W5500æ¥æ”¶æ¥è‡ªSeverçš„æ•°æ®*/
 		    printf("%s\r\n",buffer);
-            send(0,buffer,len);/*W5500ÏòServer·¢ËÍÊı¾İ*/
+            send(0,buffer,len);/*W5500å‘Serverå‘é€æ•°æ®*/
           }		  
          break;
-       case SOCK_CLOSE_WAIT:/*socketµÈ´ı¹Ø±Õ×´Ì¬*/
+       case SOCK_CLOSE_WAIT:/*socketç­‰å¾…å…³é—­çŠ¶æ€*/
          break;
-       case SOCK_CLOSED:/*socket¹Ø±Õ*/
-         socket(0,Sn_MR_TCP,anyport++,Sn_MR_ND);/*´ò¿ªsocket0µÄÒ»¸ö¶Ë¿Ú*/
+       case SOCK_CLOSED:/*socketå…³é—­*/
+         socket(0,Sn_MR_TCP,anyport++,Sn_MR_ND);/*æ‰“å¼€socket0çš„ä¸€ä¸ªç«¯å£*/
          break;
      }
   }
