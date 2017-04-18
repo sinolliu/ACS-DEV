@@ -1,0 +1,239 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\工作资料\TCP Server\TCP Server.uvproj
+Project File Date:  10/15/2014
+
+<h2>Output:</h2>
+Load "E:\\工作资料\\TCP Server\\output\\TCP Server.AXF" 
+* JLink Info: Device "STM32F103RC" selected (256 KB flash, 48 KB RAM).
+Set JLink Project File to "E:\工作资料\TCP Server\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.35b, compiled Sep  2 2011 18:34:46
+Firmware: J-Link ARM V8 compiled Nov 14 2012 22:34:52
+Hardware: V8.00
+S/N : 805306163 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Could not measure total IR len. TDO is constant high.
+**JLink Warning: CPU core not found.
+Load "E:\\工作资料\\TCP Server\\output\\TCP Server.AXF" 
+* JLink Info: Device "STM32F103RC" selected (256 KB flash, 48 KB RAM).
+Set JLink Project File to "E:\工作资料\TCP Server\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.35b, compiled Sep  2 2011 18:34:46
+Firmware: J-Link ARM V8 compiled Nov 14 2012 22:34:52
+Hardware: V8.00
+S/N : 805306163 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Could not measure total IR len. TDO is constant high.
+**JLink Warning: CPU core not found.
+Load "E:\\工作资料\\TCP Server\\output\\TCP Server.AXF" 
+* JLink Info: Device "STM32F103RC" selected (256 KB flash, 48 KB RAM).
+Set JLink Project File to "E:\工作资料\TCP Server\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.35b, compiled Sep  2 2011 18:34:46
+Firmware: J-Link ARM V8 compiled Nov 14 2012 22:34:52
+Hardware: V8.00
+S/N : 805306163 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ROMTableAddr = 0xE00FF003
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ 
+Target info:
+------------
+Device: STM32F103RC
+VTarget = 3.274V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'Target 1'
+compiling main.c...
+compiling stm32f10x_it.c...
+compiling core_cm3.c...
+assembling startup_stm32f10x_ld.s...
+compiling system_stm32f10x.c...
+compiling misc.c...
+compiling stm32f10x_bkp.c...
+compiling stm32f10x_dma.c...
+compiling stm32f10x_exti.c...
+compiling stm32f10x_flash.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_i2c.c...
+compiling stm32f10x_spi.c...
+compiling stm32f10x_tim.c...
+compiling stm32f10x_usart.c...
+compiling stm32f10x_rcc.c...
+compiling stm32f10x_adc.c...
+compiling stm32f10x_can.c...
+compiling stm32f10x_cec.c...
+compiling stm32f10x_crc.c...
+compiling stm32f10x_dac.c...
+compiling stm32f10x_dbgmcu.c...
+compiling stm32f10x_fsmc.c...
+compiling stm32f10x_iwdg.c...
+compiling stm32f10x_pwr.c...
+compiling stm32f10x_rtc.c...
+compiling stm32f10x_sdio.c...
+compiling stm32f10x_wwdg.c...
+compiling 24c16.c...
+compiling device.c...
+compiling mcu_int.c...
+compiling md5.c...
+compiling socket.c...
+compiling spi2.c...
+compiling ult.c...
+compiling w5500.c...
+linking...
+Program Size: Code=14096 RO-data=268 RW-data=80 ZI-data=4632  
+FromELF: creating hex file...
+".\output\TCP Server.axf" - 0 Error(s), 0 Warning(s).
+Load "E:\\工作资料\\TCP Server\\output\\TCP Server.AXF" 
+* JLink Info: Device "STM32F103RC" selected (256 KB flash, 48 KB RAM).
+Set JLink Project File to "E:\工作资料\TCP Server\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.35b, compiled Sep  2 2011 18:34:46
+Firmware: J-Link ARM V8 compiled Nov 14 2012 22:34:52
+Hardware: V8.00
+S/N : 805306163 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ROMTableAddr = 0xE00FF003
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ 
+Target info:
+------------
+Device: STM32F103RC
+VTarget = 3.248V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          0
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+compiling mcu_int.c...
+word\int\mcu_int.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+compiling device.c...
+compiling spi2.c...
+linking...
+Program Size: Code=14084 RO-data=268 RW-data=80 ZI-data=4632  
+FromELF: creating hex file...
+".\output\TCP Server.axf" - 0 Error(s), 0 Warning(s).
+Load "E:\\工作资料\\TCP Server\\output\\TCP Server.AXF" 
+* JLink Info: Device "STM32F103RC" selected (256 KB flash, 48 KB RAM).
+Set JLink Project File to "E:\工作资料\TCP Server\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.35b, compiled Sep  2 2011 18:34:46
+Firmware: J-Link ARM V8 compiled Nov 14 2012 22:34:52
+Hardware: V8.00
+S/N : 805306163 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ROMTableAddr = 0xE00FF003
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ 
+Target info:
+------------
+Device: STM32F103RC
+VTarget = 3.248V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          0
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+compiling mcu_int.c...
+word\int\mcu_int.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: Code=14084 RO-data=268 RW-data=80 ZI-data=4632  
+FromELF: creating hex file...
+".\output\TCP Server.axf" - 0 Error(s), 0 Warning(s).
+Load "E:\\工作资料\\TCP Server\\output\\TCP Server.AXF" 
+* JLink Info: Device "STM32F103RC" selected (256 KB flash, 48 KB RAM).
+Set JLink Project File to "E:\工作资料\TCP Server\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.35b, compiled Sep  2 2011 18:34:46
+Firmware: J-Link ARM V8 compiled Nov 14 2012 22:34:52
+Hardware: V8.00
+S/N : 805306163 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ROMTableAddr = 0xE00FF003
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: TPIU fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+ 
+Target info:
+------------
+Device: STM32F103RC
+VTarget = 3.248V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          0
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
